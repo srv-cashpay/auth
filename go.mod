@@ -1,4 +1,4 @@
-module github.com/cashpay/cashpay-auth-srv
+module github.com/srv-cashpay/auth
 
 go 1.21.0
 
