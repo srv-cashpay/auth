@@ -1,6 +1,6 @@
 package auth
 
-import "github.com/cashpay/cashpay-auth-srv/entity"
+import "github.com/srv-cashpay/auth/entity"
 
 func (s *authService) Signup(user *entity.User) error {
 	// Implement hashing password logic here if needed

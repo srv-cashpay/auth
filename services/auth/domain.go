@@ -1,9 +1,9 @@
 package auth
 
 import (
-	dto "github.com/cashpay/cashpay-auth-srv/dto/auth"
+	dto "github.com/srv-cashpay/auth/dto/auth"
 
-	r "github.com/cashpay/cashpay-auth-srv/repositories/auth"
+	r "github.com/srv-cashpay/auth/repositories/auth"
 )
 
 type AuthService interface {

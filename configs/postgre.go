@@ -6,7 +6,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/aseprayana/cashpay-auth-srv/entity"
+	"github.com/srv-cashpay/auth/entity"
 
 	"github.com/joho/godotenv"
 	"gorm.io/driver/postgres"

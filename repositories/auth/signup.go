@@ -3,7 +3,7 @@ package auth
 import (
 	"errors"
 
-	"github.com/cashpay/cashpay-auth-srv/entity"
+	"github.com/srv-cashpay/auth/entity"
 )
 
 func (r *authRepository) Signup(user *entity.User) error {

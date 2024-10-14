@@ -1,7 +1,7 @@
 package handlers
 
 import (
-	s "github.com/cashpay/cashpay-auth-srv/services/auth"
+	s "github.com/srv-cashpay/auth/services/auth"
 
 	"github.com/labstack/echo/v4"
 )

@@ -3,9 +3,9 @@ package auth
 import (
 	"sync"
 
-	dto "github.com/cashpay/cashpay-auth-srv/dto/auth"
+	dto "github.com/srv-cashpay/auth/dto/auth"
 
-	"github.com/cashpay/cashpay-auth-srv/entity"
+	"github.com/srv-cashpay/auth/entity"
 
 	"gorm.io/gorm"
 )
