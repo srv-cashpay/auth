@@ -3,9 +3,9 @@ package handlers
 import (
 	"net/http"
 
-	util "github.com/greetinc/greet-util/s"
 	"github.com/labstack/echo/v4"
 	dto "github.com/srv-cashpay/auth/dto/auth"
+	util "github.com/srv-cashpay/util/s"
 )
 
 func (h *domainHandler) Signup(c echo.Context) error {
