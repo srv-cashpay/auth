@@ -5,7 +5,7 @@ import (
 
 	"github.com/labstack/echo/v4"
 	dto "github.com/srv-cashpay/auth/dto/auth"
-	util "github.com/srv-cashpay/util/s"
+	util "github.com/srv-cashpay/util"
 )
 
 func (h *domainHandler) Signup(c echo.Context) error {
