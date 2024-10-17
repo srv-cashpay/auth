@@ -17,7 +17,7 @@ type DomainRepository interface {
 type authRepository struct {
 	DB    *gorm.DB
 	mu    sync.Mutex
-	users map[string]*entity.User
+	users map[string]*entity.AccessDoor
 }
 
 func NewAuthRepository(DB *gorm.DB) DomainRepository {
