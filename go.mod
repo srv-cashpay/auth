@@ -5,8 +5,8 @@ go 1.21.0
 require (
 	github.com/joho/godotenv v1.5.1
 	github.com/labstack/echo/v4 v4.12.0
-	github.com/srv-cashpay/middlewares v0.0.0-20241016094621-e5a67ef5ffe5
-	github.com/srv-cashpay/util v0.0.0-20241014103742-61d01c932e01
+	github.com/srv-cashpay/middlewares v0.0.0-20241017012028-467e78df1e98
+	github.com/srv-cashpay/util v0.0.0-20241016122255-5e9c59454786
 	gorm.io/driver/postgres v1.5.9
 	gorm.io/gorm v1.25.12
 )
