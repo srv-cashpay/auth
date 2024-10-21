@@ -52,8 +52,8 @@ github.com/sirupsen/logrus v1.9.3 h1:dueUQJ1C2q9oE3F7wvmSGAaVtTmUizReu6fjN8uqzbQ
 github.com/sirupsen/logrus v1.9.3/go.mod h1:naHLuLoDiP4jHNo9R0sCBMtWGeIprob74mVsIT4qYEQ=
 github.com/srv-cashpay/middlewares v0.0.0-20241017012028-467e78df1e98 h1:zR81smp5mdCq1rJiQo2A+vgvykgWM0r6ydBoJmxUQJs=
 github.com/srv-cashpay/middlewares v0.0.0-20241017012028-467e78df1e98/go.mod h1:Xiq1uSSoi4yjDVSODw1i56V99hnGbxWD3f+NxWHlgS8=
-github.com/srv-cashpay/util v0.0.0-20241016122255-5e9c59454786 h1:++cv698Jch5AhbHn6Rp5U5wn8OF4cuKzjX6rlrWR6RY=
-github.com/srv-cashpay/util v0.0.0-20241016122255-5e9c59454786/go.mod h1:NCCxkuDPUYAQsiY7TIx2QkrBE7/1fN4q5RzCvdwDl0c=
+github.com/srv-cashpay/util v0.0.0-20241017070034-20a92e9906fd h1:rLKTJ9OsMwi6c/TtLWO01qbEOlaluWyQAyuxTisR1Ig=
+github.com/srv-cashpay/util v0.0.0-20241017070034-20a92e9906fd/go.mod h1:NCCxkuDPUYAQsiY7TIx2QkrBE7/1fN4q5RzCvdwDl0c=
 github.com/streadway/amqp v1.1.0 h1:py12iX8XSyI7aN/3dUT8DFIDJazNJsVJdxNVEpnQTZM=
 github.com/streadway/amqp v1.1.0/go.mod h1:WYSrTEYHOXHd0nwFeUXAe2G2hRnQT+deZJJf88uS9Bg=
 github.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=

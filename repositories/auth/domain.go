@@ -12,6 +12,10 @@ import (
 
 type DomainRepository interface {
 	Signup(req dto.SignupRequest) (dto.SignupResponse, error)
+	Signin(req dto.SigninRequest) (*entity.AccessDoor, error)
+	FindByWhatsapp(whatsapp string) (*entity.AccessDoor, error)
+	UpdateTokenVerified(userID string, otp string, token string) (dto.SigninResponse, error)
+	UpdateUser(user *entity.AccessDoor) error
 }
 
 type authRepository struct {

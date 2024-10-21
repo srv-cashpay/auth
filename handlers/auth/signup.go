@@ -1,11 +1,10 @@
 package handlers
 
 import (
-	"net/http"
-
 	"github.com/labstack/echo/v4"
 	dto "github.com/srv-cashpay/auth/dto/auth"
 	util "github.com/srv-cashpay/util/s"
+	res "github.com/srv-cashpay/util/s/response"
 )
 
 func (h *domainHandler) Signup(c echo.Context) error {
@@ -14,15 +13,15 @@ func (h *domainHandler) Signup(c echo.Context) error {
 
 	err := c.Bind(&req)
 	if err != nil {
-		return c.JSON(http.StatusBadRequest, echo.Map{"message": "Invalid input"})
+		return res.ErrorBuilder(&res.ErrorConstant.BadRequest, err).Send(c)
 	}
 	resp, err = h.serviceAuth.Signup(req)
 	if err != nil {
 		if util.IsDuplicateEntryError(err) {
-			return c.JSON(http.StatusInternalServerError, echo.Map{"message": err.Error()})
+			return res.ErrorResponse(&res.ErrorConstant.Duplicate).Send(c)
 		}
-		return c.JSON(http.StatusInternalServerError, echo.Map{"message": err.Error()})
+		return res.ErrorResponse(err).Send(c)
 	}
 
-	return c.JSON(http.StatusCreated, resp)
+	return res.SuccessResponse(resp).Send(c)
 }

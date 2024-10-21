@@ -25,6 +25,12 @@ func New() *echo.Echo {
 	auth := e.Group("api/auth", middlewares.ApiKeyMiddleware)
 	{
 		auth.POST("/signup", authH.Signup)
+		auth.POST("/signin", authH.Signin)
+	}
+
+	logout := e.Group("api/logout")
+	{
+		logout.POST("", authH.Signout)
 
 	}
 	return e
