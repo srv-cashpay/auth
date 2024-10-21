@@ -65,17 +65,6 @@ func (u *authService) SigninByPhoneNumber(req dto.SigninRequest) (*dto.SigninRes
 	}
 
 	if err != nil || util.VerifyPassword(user.Password, req.Password) != nil {
-		user.FailedSigninAttempts++
-
-		// Check if the maximum allowed failed attempts is reached
-		if user.FailedSigninAttempts >= 6 {
-			// Suspend the account for 5 minutes
-			suspendedUntil := time.Now().Add(5 * time.Minute)
-			user.SuspendedUntil = &suspendedUntil
-
-			// Reset failed signin attempts counter
-			user.FailedSigninAttempts = 0
-		}
 
 		// Update the user in the repository
 		if err := u.Repo.UpdateUser(user); err != nil {
@@ -83,8 +72,6 @@ func (u *authService) SigninByPhoneNumber(req dto.SigninRequest) (*dto.SigninRes
 		}
 		return nil, res.ErrorBuilder(&res.ErrorConstant.VerifyPassword, err)
 	}
-
-	user.FailedSigninAttempts = 0
 
 	token, err := u.jwt.GenerateToken(user.ID, user.UserDetail.FullName, user.UserDetail.ProfileID)
 	return &dto.SigninResponse{
@@ -142,17 +129,6 @@ func (u *authService) Signin(req dto.SigninRequest) (*dto.SigninResponse, error)
 	}
 
 	if err != nil || util.VerifyPassword(user.Password, req.Password) != nil {
-		user.FailedSigninAttempts++
-
-		// Check if the maximum allowed failed attempts is reached
-		if user.FailedSigninAttempts >= 6 {
-			// Suspend the account for 5 minutes
-			suspendedUntil := time.Now().Add(5 * time.Minute)
-			user.SuspendedUntil = &suspendedUntil
-
-			// Reset failed signin attempts counter
-			user.FailedSigninAttempts = 0
-		}
 
 		// Update the user in the repository
 		if err := u.Repo.UpdateUser(user); err != nil {
@@ -160,8 +136,6 @@ func (u *authService) Signin(req dto.SigninRequest) (*dto.SigninResponse, error)
 		}
 		return nil, res.ErrorBuilder(&res.ErrorConstant.VerifyPassword, err)
 	}
-
-	user.FailedSigninAttempts = 0
 
 	token, err := u.jwt.GenerateToken(user.ID, user.UserDetail.FullName, user.UserDetail.ProfileID)
 	if err != nil {

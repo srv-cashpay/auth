@@ -12,15 +12,18 @@ func (r *authRepository) Signup(req dto.SignupRequest) (dto.SignupResponse, erro
 	user := entity.AccessDoor{
 		ID:       req.ID,
 		Whatsapp: req.Whatsapp,
+		Email:    req.Email,
+		Password: req.Password,
 	}
-	if err := r.DB.Save(&user).Error; err != nil {
+
+	if err := r.DB.Save(&user).First(&user).Error; err != nil {
 		return dto.SignupResponse{}, err
 	}
 
 	verified := entity.UserVerified{
 		ID:        util.GenerateRandomString(),
 		UserID:    user.ID,
-		Token:     req.TokenVerified,
+		Token:     req.Token,
 		Otp:       req.Otp,
 		ExpiredAt: time.Now().Add(4 * time.Minute),
 	}
@@ -28,13 +31,13 @@ func (r *authRepository) Signup(req dto.SignupRequest) (dto.SignupResponse, erro
 	if err := r.DB.Save(&verified).First(&verified).Error; err != nil {
 		return dto.SignupResponse{}, err
 	}
-
 	response := dto.SignupResponse{
-		ID:            user.ID,
-		Whatsapp:      user.Whatsapp,
-		TokenVerified: verified.Token,
+		ID:       user.ID,
+		Whatsapp: user.Whatsapp,
+		Email:    user.Email,
+		Password: user.Password,
+		Token:    verified.Token,
 	}
 
 	return response, nil
-
 }

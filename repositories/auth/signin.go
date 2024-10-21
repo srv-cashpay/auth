@@ -8,7 +8,7 @@ import (
 	util "github.com/srv-cashpay/util/s"
 )
 
-func (u *authRepository) Signin(req dto.SigninRequest) (*entity.AccessDoor, error) {
+func (u *authRepository) SigninByPhoneNumber(req dto.SigninRequest) (*entity.AccessDoor, error) {
 	var existingUser entity.AccessDoor
 	err := u.DB.Preload("Verified").Preload("UserDetail").Where("whatsapp = ?", req.Whatsapp).First(&existingUser).Error
 	if err != nil {
@@ -18,13 +18,14 @@ func (u *authRepository) Signin(req dto.SigninRequest) (*entity.AccessDoor, erro
 	return &existingUser, nil
 }
 
-func (r *authRepository) FindByWhatsapp(whatsapp string) (*entity.AccessDoor, error) {
-	var user entity.AccessDoor
-	err := r.DB.Where("whatsapp = ?", whatsapp).First(&user).Error
+func (u *authRepository) Signin(req dto.SigninRequest) (*entity.AccessDoor, error) {
+	var existingUser entity.AccessDoor
+	err := u.DB.Preload("Verified").Preload("UserDetail").Where("email = ?", req.Email).First(&existingUser).Error
 	if err != nil {
 		return nil, err
 	}
-	return &user, nil
+
+	return &existingUser, nil
 }
 
 func (u *authRepository) UpdateUser(user *entity.AccessDoor) error {

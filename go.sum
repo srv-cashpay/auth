@@ -50,8 +50,8 @@ github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZb
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
 github.com/sirupsen/logrus v1.9.3 h1:dueUQJ1C2q9oE3F7wvmSGAaVtTmUizReu6fjN8uqzbQ=
 github.com/sirupsen/logrus v1.9.3/go.mod h1:naHLuLoDiP4jHNo9R0sCBMtWGeIprob74mVsIT4qYEQ=
-github.com/srv-cashpay/middlewares v0.0.0-20241017012028-467e78df1e98 h1:zR81smp5mdCq1rJiQo2A+vgvykgWM0r6ydBoJmxUQJs=
-github.com/srv-cashpay/middlewares v0.0.0-20241017012028-467e78df1e98/go.mod h1:Xiq1uSSoi4yjDVSODw1i56V99hnGbxWD3f+NxWHlgS8=
+github.com/srv-cashpay/middlewares v0.0.0-20241021062808-ef2b6f2c3012 h1:PTd1bUBvaw+pgRemfmnc9Wsi9m7/ECT1gr9fL7IE1QU=
+github.com/srv-cashpay/middlewares v0.0.0-20241021062808-ef2b6f2c3012/go.mod h1:Xiq1uSSoi4yjDVSODw1i56V99hnGbxWD3f+NxWHlgS8=
 github.com/srv-cashpay/util v0.0.0-20241017070034-20a92e9906fd h1:rLKTJ9OsMwi6c/TtLWO01qbEOlaluWyQAyuxTisR1Ig=
 github.com/srv-cashpay/util v0.0.0-20241017070034-20a92e9906fd/go.mod h1:NCCxkuDPUYAQsiY7TIx2QkrBE7/1fN4q5RzCvdwDl0c=
 github.com/streadway/amqp v1.1.0 h1:py12iX8XSyI7aN/3dUT8DFIDJazNJsVJdxNVEpnQTZM=
