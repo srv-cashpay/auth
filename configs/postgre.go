@@ -56,7 +56,7 @@ func InitDB() *gorm.DB {
 	// Migrate the schema
 	db.AutoMigrate(
 		&entity.AccessDoor{},
-		&entity.UserDetail{},
+		&entity.MerchantDetail{},
 		&entity.UserVerified{},
 		&entity.File{},
 		&entity.ProfilePicture{},
@@ -64,6 +64,7 @@ func InitDB() *gorm.DB {
 		&entity.Role{},
 		&entity.Permission{},
 		&entity.RoleUser{},
+		&entity.Authenticator{},
 	)
 
 	return db

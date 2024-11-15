@@ -5,8 +5,9 @@ go 1.21.0
 require (
 	github.com/joho/godotenv v1.5.1
 	github.com/labstack/echo/v4 v4.12.0
-	github.com/srv-cashpay/middlewares v0.0.0-20241021062808-ef2b6f2c3012
-	github.com/srv-cashpay/util v0.0.0-20241017070034-20a92e9906fd	
+	github.com/srv-cashpay/middlewares v0.0.0-20241115071029-1045a21a2fbf
+	github.com/srv-cashpay/util v0.0.0-20241027032732-ad63c2c98116
+	gopkg.in/gomail.v2 v2.0.0-20160411212932-81ebce5c23df
 	gorm.io/driver/postgres v1.5.9
 	gorm.io/gorm v1.25.12
 )
@@ -45,5 +46,4 @@ require (
 	golang.org/x/sys v0.26.0 // indirect
 	golang.org/x/text v0.19.0 // indirect
 	gopkg.in/alexcesaro/quotedprintable.v3 v3.0.0-20150716171945-2caba252f4dc // indirect
-	gopkg.in/gomail.v2 v2.0.0-20160411212932-81ebce5c23df // indirect
 )

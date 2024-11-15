@@ -10,7 +10,7 @@ import (
 
 func (u *authRepository) SigninByPhoneNumber(req dto.SigninRequest) (*entity.AccessDoor, error) {
 	var existingUser entity.AccessDoor
-	err := u.DB.Preload("Verified").Preload("UserDetail").Where("whatsapp = ?", req.Whatsapp).First(&existingUser).Error
+	err := u.DB.Preload("Verified").Preload("Merchant").Where("whatsapp = ?", req.Whatsapp).First(&existingUser).Error
 	if err != nil {
 		return nil, err
 	}
@@ -20,7 +20,7 @@ func (u *authRepository) SigninByPhoneNumber(req dto.SigninRequest) (*entity.Acc
 
 func (u *authRepository) Signin(req dto.SigninRequest) (*entity.AccessDoor, error) {
 	var existingUser entity.AccessDoor
-	err := u.DB.Preload("Verified").Preload("UserDetail").Where("email = ?", req.Email).First(&existingUser).Error
+	err := u.DB.Preload("Verified").Preload("Merchant").Where("email = ?", req.Email).First(&existingUser).Error
 	if err != nil {
 		return nil, err
 	}

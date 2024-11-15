@@ -18,12 +18,6 @@ func (u *authService) Signup(req dto.SignupRequest) (dto.SignupResponse, error) 
 		return dto.SignupResponse{}, res.ErrorBuilder(&res.ErrorConstant.RegisterMail, nil)
 	}
 
-	formattedPhone, err := util.FormatPhoneNumber(req.Whatsapp, req.Country)
-	if err != nil {
-		return dto.SignupResponse{}, res.ErrorBuilder(&res.ErrorConstant.BadRequest, err)
-	}
-	req.Whatsapp = formattedPhone
-
 	// Encrypt the email
 	encryptedEmail, err := util.Encrypt(req.Email)
 	if err != nil {
@@ -40,7 +34,7 @@ func (u *authService) Signup(req dto.SignupRequest) (dto.SignupResponse, error) 
 		ID:       util.GenerateRandomString(),
 		Otp:      GenerateRandomNumeric(4),
 		Whatsapp: req.Whatsapp,
-		Country:  req.Country,
+		FullName: req.FullName,
 		Email:    encryptedEmail,
 		Password: req.Password,
 		Token:    util.GenerateRandomString(),
@@ -59,7 +53,7 @@ func (u *authService) Signup(req dto.SignupRequest) (dto.SignupResponse, error) 
 		ID:       createdUser.ID,
 		Whatsapp: createdUser.Whatsapp,
 		Email:    req.Email, // Send back the plain email
-		Country:  createdUser.Country,
+		FullName: createdUser.FullName,
 		Password: createdUser.Password,
 		Token:    createdUser.Token,
 	}

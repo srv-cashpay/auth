@@ -6,15 +6,17 @@ type SignupRequest struct {
 	Whatsapp string `json:"whatsapp" form:"whatsapp" validate:"required,whatsapp"`
 	Email    string `json:"email" form:"email" validate:"required,email"`
 	Password string `json:"password" form:"password" validate:"required,password"`
-	Country  string `json:"country"` // Add this field for country selection
+	FullName string `json:"full_name"`
 	Token    string `json:"token"`
+	Status   bool   `json:"status"`
 }
 
 type SignupResponse struct {
 	ID       string `json:"id"`
+	FullName string `json:"full_name"`
 	Whatsapp string `json:"whatsapp" form:"whatsapp" validate:"required,whatsapp"`
 	Email    string `json:"email" form:"email" validate:"required,email"`
-	Country  string `json:"country"` // Add this field for country selection
 	Password string `json:"-" form:"password" validate:"required,password"`
 	Token    string `json:"token"`
+	Status   bool   `json:"status"`
 }

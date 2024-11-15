@@ -9,6 +9,7 @@ import (
 
 type AuthService interface {
 	Signup(req dto.SignupRequest) (dto.SignupResponse, error)
+	Authenticator(req dto.AuthenticatorRequest) (dto.AuthenticatorResponse, error)
 	Signin(req dto.SigninRequest) (*dto.SigninResponse, error)
 	SigninByPhoneNumber(req dto.SigninRequest) (*dto.SigninResponse, error)
 }

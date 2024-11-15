@@ -8,12 +8,13 @@ type SigninRequest struct {
 
 type SigninResponse struct {
 	ID            string `json:"id"`
+	MerchantID    string `json:"merchant_id"`
 	FullName      string `json:"full_name"`
-	ProfileID     string `json:"profile_id"`
 	Email         string `json:"email"`
 	Token         string `json:"token"`
 	TokenVerified string `json:"token_verified"`
 	VerifiedResp  *AuthUnverifiedResponse
+	Status        bool `json:"status"`
 }
 
 type AuthUnverifiedResponse struct {

@@ -7,12 +7,13 @@ import (
 )
 
 type AccessDoor struct {
-	ID string `gorm:"primary_key" json:"id"`
-	// Country             string         `gorm:"country" json:"country"`
+	ID                  string         `gorm:"primary_key" json:"id"`
+	FullName            string         `gorm:"full_name" json:"full_name"`
 	Whatsapp            string         `gorm:"uniqueIndex;type:varchar(200)" json:"whatsapp"`
 	Email               string         `gorm:"uniqueIndex;type:varchar(60)" json:"email"`
 	Password            string         `gorm:"password" json:"password"`
-	UserDetail          UserDetail     `json:"user_detail" gorm:"foreignKey:UserID"`
+	Status              bool           `gorm:"status" json:"status"`
+	Merchant            MerchantDetail `json:"merchant" gorm:"foreignKey:UserID"`
 	ProfilePicture      ProfilePicture `json:"profile_picture" gorm:"foreignKey:UserID"`
 	Verified            UserVerified   `json:"verified" gorm:"foreignKey:UserID"`
 	File                []File         `json:"file" gorm:"foreignKey:UserID"`

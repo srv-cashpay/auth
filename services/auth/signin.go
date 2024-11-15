@@ -13,9 +13,15 @@ import (
 )
 
 func (u *authService) SigninByPhoneNumber(req dto.SigninRequest) (*dto.SigninResponse, error) {
-	req.Email = strings.ToLower(req.Email)
+	req.Whatsapp = strings.ToLower(req.Whatsapp)
 
 	user, err := u.Repo.SigninByPhoneNumber(req)
+	if err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			return nil, res.ErrorBuilder(&res.ErrorConstant.RecordNotFound, err)
+		}
+		return nil, res.ErrorResponse(err)
+	}
 
 	if err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
@@ -73,11 +79,12 @@ func (u *authService) SigninByPhoneNumber(req dto.SigninRequest) (*dto.SigninRes
 		return nil, res.ErrorBuilder(&res.ErrorConstant.VerifyPassword, err)
 	}
 
-	token, err := u.jwt.GenerateToken(user.ID, user.UserDetail.FullName, user.UserDetail.ProfileID)
+	token, err := u.jwt.GenerateToken(user.ID, user.Whatsapp, user.Merchant.ID)
+
 	return &dto.SigninResponse{
 		ID:            user.ID,
-		FullName:      user.UserDetail.FullName,
-		ProfileID:     user.UserDetail.ProfileID,
+		MerchantID:    user.Merchant.ID,
+		FullName:      user.FullName,
 		Email:         user.Email,
 		Token:         token,
 		TokenVerified: user.Verified.Token,
@@ -137,7 +144,7 @@ func (u *authService) Signin(req dto.SigninRequest) (*dto.SigninResponse, error)
 		return nil, res.ErrorBuilder(&res.ErrorConstant.VerifyPassword, err)
 	}
 
-	token, err := u.jwt.GenerateToken(user.ID, user.UserDetail.FullName, user.UserDetail.ProfileID)
+	token, err := u.jwt.GenerateToken(user.ID, user.Whatsapp, user.Merchant.ID)
 	if err != nil {
 		return nil, res.ErrorBuilder(&res.ErrorConstant.InternalServerError, err)
 	}
@@ -150,9 +157,9 @@ func (u *authService) Signin(req dto.SigninRequest) (*dto.SigninResponse, error)
 
 	return &dto.SigninResponse{
 		ID:            user.ID,
-		FullName:      user.UserDetail.FullName,
-		ProfileID:     user.UserDetail.ProfileID,
-		Email:         decryptedEmail, // Return decrypted email
+		MerchantID:    user.Merchant.ID,
+		FullName:      user.FullName,
+		Email:         decryptedEmail,
 		Token:         token,
 		TokenVerified: user.Verified.Token,
 	}, nil

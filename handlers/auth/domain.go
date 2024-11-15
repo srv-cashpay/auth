@@ -7,10 +7,10 @@ import (
 )
 
 type DomainHandler interface {
-	Signup(c echo.Context) error  //masuk
-	Signin(c echo.Context) error  //masuk
-	Signout(c echo.Context) error //keluar
-
+	Signup(c echo.Context) error        //masuk
+	Signin(c echo.Context) error        //masuk
+	Signout(c echo.Context) error       //keluar
+	Authenticator(c echo.Context) error //Authenticator
 }
 
 type domainHandler struct {
