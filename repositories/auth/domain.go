@@ -17,6 +17,8 @@ type DomainRepository interface {
 	UpdateTokenVerified(userID string, otp string, token string) (dto.SigninResponse, error)
 	UpdateUser(user *entity.AccessDoor) error
 	SigninByPhoneNumber(req dto.SigninRequest) (*entity.AccessDoor, error)
+	RefreshToken(req dto.RefreshTokenRequest) (*entity.AccessDoor, error)
+	SaveUser(user *entity.AccessDoor) error
 }
 
 type authRepository struct {

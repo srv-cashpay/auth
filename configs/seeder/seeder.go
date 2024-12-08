@@ -11,39 +11,32 @@ func Role() {
 	var limits []entity.Role
 
 	var limit = entity.Role{
-		ID:   "956f2014-f8ab-41e2-88c1-0c3871524665",
-		Role: "Superadmin",
+		ID:   "8gHwINv71XDy",
+		Role: "God Cashpay",
 	}
 
 	limits = append(limits, limit)
 
 	var limit2 = entity.Role{
-		ID:   "956f2014-f8ab-41e2-88c1-0c3871524665",
-		Role: "admin",
+		ID:   "e9Wl2JyVeBM_",
+		Role: "Admin",
 	}
 
 	limits = append(limits, limit2)
 
 	var limit3 = entity.Role{
-		ID:   "956f2014-f8ab-41e2-88c1-0c3871524665",
-		Role: "kasir",
+		ID:   "JQn-Y=l=NvJ7",
+		Role: "Kasir",
 	}
 
 	limits = append(limits, limit3)
 
 	var limit4 = entity.Role{
-		ID:   "956f2014-f8ab-41e2-88c1-0e3871524665",
-		Role: "gudang",
+		ID:   "vC8h4YlOcCHf",
+		Role: "Gudang",
 	}
 
 	limits = append(limits, limit4)
-
-	var limit5 = entity.Role{
-		ID:   "956f2014-f8ab-41e2-88c1-0e3871524665",
-		Role: "gudang",
-	}
-
-	limits = append(limits, limit5)
 
 	if err := db.Create(&limits).Error; err != nil {
 		return

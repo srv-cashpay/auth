@@ -9,6 +9,7 @@ import (
 type DomainHandler interface {
 	Signup(c echo.Context) error        //masuk
 	Signin(c echo.Context) error        //masuk
+	RefreshToken(c echo.Context) error  //refresh
 	Signout(c echo.Context) error       //keluar
 	Authenticator(c echo.Context) error //Authenticator
 }

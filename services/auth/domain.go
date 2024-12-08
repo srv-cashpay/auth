@@ -12,6 +12,7 @@ type AuthService interface {
 	Authenticator(req dto.AuthenticatorRequest) (dto.AuthenticatorResponse, error)
 	Signin(req dto.SigninRequest) (*dto.SigninResponse, error)
 	SigninByPhoneNumber(req dto.SigninRequest) (*dto.SigninResponse, error)
+	RefreshAccessToken(req dto.RefreshTokenRequest) (string, error)
 }
 
 type authService struct {

@@ -2,6 +2,7 @@ package auth
 
 import (
 	"crypto/tls"
+	"fmt"
 	"math/rand"
 	"strings"
 	"time"
@@ -9,6 +10,7 @@ import (
 	dto "github.com/srv-cashpay/auth/dto/auth"
 	util "github.com/srv-cashpay/util/s"
 	res "github.com/srv-cashpay/util/s/response"
+	"golang.org/x/crypto/blake2b"
 	"gopkg.in/gomail.v2"
 )
 
@@ -17,6 +19,8 @@ func (u *authService) Signup(req dto.SignupRequest) (dto.SignupResponse, error) 
 	if !util.IsValidEmail(req.Email) {
 		return dto.SignupResponse{}, res.ErrorBuilder(&res.ErrorConstant.RegisterMail, nil)
 	}
+
+	req.Whatsapp = FormatWhatsappNumber(req.Whatsapp)
 
 	// Encrypt the email
 	encryptedEmail, err := util.Encrypt(req.Email)
@@ -30,8 +34,14 @@ func (u *authService) Signup(req dto.SignupRequest) (dto.SignupResponse, error) 
 		return dto.SignupResponse{}, encryp
 	}
 
+	// Generate unique ID and OTP
+	secureID, err := generateSecureID()
+	if err != nil {
+		return dto.SignupResponse{}, res.ErrorBuilder(&res.ErrorConstant.InternalServerError, err)
+	}
+
 	user := dto.SignupRequest{
-		ID:       util.GenerateRandomString(),
+		ID:       secureID,
 		Otp:      GenerateRandomNumeric(4),
 		Whatsapp: req.Whatsapp,
 		FullName: req.FullName,
@@ -110,4 +120,36 @@ func GenerateRandomNumeric(length int) string {
 	}
 
 	return result.String()
+}
+
+// Fungsi untuk menghasilkan ID unik dengan Blake2 dan panjang 12 karakter
+func generateSecureID() (string, error) {
+	const chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_-="
+
+	// Generate a salt
+	salt := make([]byte, 16)
+	_, err := rand.Read(salt)
+	if err != nil {
+		return "", err
+	}
+
+	// Combine salt and current timestamp for uniqueness
+	timestamp := time.Now().UnixNano()
+	saltedID := fmt.Sprintf("%x%d", salt, timestamp)
+
+	// Hash the combination using Blake2
+	hash, err := blake2b.New512(nil)
+	if err != nil {
+		return "", err
+	}
+	hash.Write([]byte(saltedID))
+	hashBytes := hash.Sum(nil)
+
+	// Convert hash bytes into a valid string
+	var secureID []byte
+	for i := 0; i < 12; i++ {
+		secureID = append(secureID, chars[hashBytes[i]%byte(len(chars))])
+	}
+
+	return string(secureID), nil
 }

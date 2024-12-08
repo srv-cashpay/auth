@@ -1,6 +1,7 @@
 package auth
 
 import (
+	"errors"
 	"time"
 
 	dto "github.com/srv-cashpay/auth/dto/auth"
@@ -53,4 +54,11 @@ func (u *authRepository) UpdateTokenVerified(userID string, otp string, token st
 	}
 
 	return response, nil
+}
+
+func (repo *authRepository) SaveUser(user *entity.AccessDoor) error {
+	if err := repo.DB.Save(user).Error; err != nil {
+		return errors.New("failed to save user")
+	}
+	return nil
 }
