@@ -65,6 +65,7 @@ func InitDB() *gorm.DB {
 		&entity.Permission{},
 		&entity.RoleUser{},
 		&entity.Authenticator{},
+		&entity.PasswordResetToken{},
 	)
 
 	return db

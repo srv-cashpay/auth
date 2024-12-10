@@ -11,9 +11,11 @@ type MerchantDetail struct {
 	UserID       string         `gorm:"type:varchar(36);index" json:"user_id"`
 	MerchantName string         `gorm:"type:varchar(50)" json:"merchant_name"`
 	Address      string         `gorm:"address" json:"address"`
+	Country      string         `gorm:"country" json:"country"`
 	City         string         `gorm:"city" json:"city"`
-	Zip          string         `gorm:"zip" json:"zip"`
+	Zip          int            `gorm:"zip" json:"zip"`
 	Phone        string         `gorm:"phone" json:"phone"`
+	CurrencyID   int            `gorm:"currency_id" json:"currency_id"`
 	Description  string         `gorm:"description" json:"description"`
 	UpdatedBy    string         `gorm:"update_by" json:"update_by"`
 	CreatedAt    time.Time      `json:"created_at"`

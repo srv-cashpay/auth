@@ -22,11 +22,12 @@ func (r *authRepository) Signup(req dto.SignupRequest) (dto.SignupResponse, erro
 		return dto.SignupResponse{}, err
 	}
 	user := entity.AccessDoor{
-		ID:       req.ID,
-		FullName: req.FullName,
-		Whatsapp: req.Whatsapp,
-		Email:    req.Email,
-		Password: req.Password,
+		ID:           req.ID,
+		FullName:     req.FullName,
+		Whatsapp:     req.Whatsapp,
+		Email:        req.Email,
+		Password:     req.Password,
+		AccessRoleID: req.AccessRoleID,
 	}
 
 	if err := r.DB.Save(&user).Error; err != nil {
@@ -54,12 +55,13 @@ func (r *authRepository) Signup(req dto.SignupRequest) (dto.SignupResponse, erro
 		return dto.SignupResponse{}, err
 	}
 	response := dto.SignupResponse{
-		ID:       user.ID,
-		FullName: user.FullName,
-		Whatsapp: user.Whatsapp,
-		Email:    user.Email,
-		Password: user.Password,
-		Token:    verified.Token,
+		ID:           user.ID,
+		FullName:     user.FullName,
+		Whatsapp:     user.Whatsapp,
+		Email:        user.Email,
+		Password:     user.Password,
+		Token:        verified.Token,
+		AccessRoleID: user.AccessRoleID,
 	}
 
 	return response, nil

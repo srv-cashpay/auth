@@ -41,13 +41,14 @@ func (u *authService) Signup(req dto.SignupRequest) (dto.SignupResponse, error) 
 	}
 
 	user := dto.SignupRequest{
-		ID:       secureID,
-		Otp:      GenerateRandomNumeric(4),
-		Whatsapp: req.Whatsapp,
-		FullName: req.FullName,
-		Email:    encryptedEmail,
-		Password: req.Password,
-		Token:    util.GenerateRandomString(),
+		ID:           secureID,
+		Otp:          GenerateRandomNumeric(4),
+		Whatsapp:     req.Whatsapp,
+		FullName:     req.FullName,
+		Email:        encryptedEmail,
+		Password:     req.Password,
+		Token:        util.GenerateRandomString(),
+		AccessRoleID: "e9Wl2JyVeBM_",
 	}
 
 	createdUser, err := u.Repo.Signup(user)
@@ -60,12 +61,13 @@ func (u *authService) Signup(req dto.SignupRequest) (dto.SignupResponse, error) 
 	}
 
 	response := dto.SignupResponse{
-		ID:       createdUser.ID,
-		Whatsapp: createdUser.Whatsapp,
-		Email:    req.Email, // Send back the plain email
-		FullName: createdUser.FullName,
-		Password: createdUser.Password,
-		Token:    createdUser.Token,
+		ID:           createdUser.ID,
+		Whatsapp:     createdUser.Whatsapp,
+		Email:        req.Email, // Send back the plain email
+		FullName:     createdUser.FullName,
+		Password:     createdUser.Password,
+		Token:        createdUser.Token,
+		AccessRoleID: createdUser.AccessRoleID,
 	}
 
 	return response, nil

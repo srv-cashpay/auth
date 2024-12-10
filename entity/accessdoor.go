@@ -12,6 +12,7 @@ type AccessDoor struct {
 	Whatsapp       string         `gorm:"uniqueIndex;type:varchar(200)" json:"whatsapp"`
 	Email          string         `gorm:"uniqueIndex;type:varchar(60)" json:"email"`
 	Password       string         `gorm:"password" json:"password"`
+	AccessRoleID   string         `gorm:"access_role_id" json:"access_role_id"`
 	LoginAttempts  int            `gorm:"login_attempts" json:"login_attempts"`
 	Suspended      bool           `gorm:"suspended" json:"suspended"`
 	LastAttempt    time.Time      `gorm:"last_attempt" json:"last_attempt"`

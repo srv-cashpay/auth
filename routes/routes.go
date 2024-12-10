@@ -15,6 +15,10 @@ import (
 	h_merchant "github.com/srv-cashpay/auth/handlers/merchant"
 	r_merchant "github.com/srv-cashpay/auth/repositories/merchant"
 	s_merchant "github.com/srv-cashpay/auth/services/merchant"
+
+	h_verifyReset "github.com/srv-cashpay/auth/handlers/auth/reset_password"
+	r_verifyReset "github.com/srv-cashpay/auth/repositories/auth/reset_password"
+	s_verifyReset "github.com/srv-cashpay/auth/services/auth/reset_password"
 )
 
 var (
@@ -32,6 +36,10 @@ var (
 	verifyR = r_verify.NewVerifyRepository(DB)
 	verifyS = s_verify.NewVerifyService(verifyR, JWT)
 	verifyH = h_verify.NewVerifyHandler(verifyS)
+
+	resetR = r_verifyReset.NewResetRepository(DB)
+	resetS = s_verifyReset.NewResetService(resetR, JWT)
+	resetH = h_verifyReset.NewResetHandler(resetS)
 )
 
 func New() *echo.Echo {
@@ -48,6 +56,12 @@ func New() *echo.Echo {
 		auth.POST("/refresh", authH.RefreshToken)
 		auth.POST("/authenticator", authH.Authenticator)
 	}
+
+	//reset password
+	e.POST("/resetpassword", resetH.ResetPassword)
+	e.POST("/verify-reset", resetH.VerifyResetPassword)
+	e.POST("/request-reset-password", resetH.RequestResetPassword)
+	e.PUT("/resend-reset", resetH.ResendVerification)
 
 	merchant := e.Group("api/merchant", middlewares.AuthorizeJWT(JWT))
 	{

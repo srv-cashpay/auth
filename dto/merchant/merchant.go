@@ -16,7 +16,7 @@ type GetMerchantRequest struct {
 	MerchantName string         `json:"merchant_name"`
 	Address      string         `json:"address"`
 	City         string         `json:"city"`
-	Zip          string         `json:"zip"`
+	Zip          int            `json:"zip"`
 	Phone        string         `json:"phone"`
 	Description  string         `json:"description"`
 	UpdatedBy    string         `json:"update_by"`
@@ -31,7 +31,7 @@ type GetMerchantResponse struct {
 	MerchantName string         `json:"merchant_name"`
 	Address      string         `json:"address"`
 	City         string         `json:"city"`
-	Zip          string         `json:"zip"`
+	Zip          int            `json:"zip"`
 	Phone        string         `json:"phone"`
 	Description  string         `json:"description"`
 	UpdatedBy    string         `json:"update_by"`
@@ -46,7 +46,7 @@ type UpdateMerchantRequest struct {
 	MerchantName string    `json:"merchant_name"`
 	Address      string    `json:"address"`
 	City         string    `json:"city"`
-	Zip          string    `json:"zip"`
+	Zip          int       `json:"zip"`
 	Phone        string    `json:"phone"`
 	Description  string    `json:"description"`
 	UpdatedBy    string    `json:"update_by"`
@@ -59,7 +59,7 @@ type UpdateMerchantResponse struct {
 	MerchantName string    `json:"merchant_name"`
 	Address      string    `json:"address"`
 	City         string    `json:"city"`
-	Zip          string    `json:"zip"`
+	Zip          int       `json:"zip"`
 	Phone        string    `json:"phone"`
 	Description  string    `json:"description"`
 	UpdatedBy    string    `json:"update_by"`
