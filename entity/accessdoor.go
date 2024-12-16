@@ -7,8 +7,8 @@ import (
 )
 
 type AccessDoor struct {
-	ID             string         `gorm:"primary_key" json:"id"`
-	FullName       string         `gorm:"full_name" json:"full_name"`
+	ID             string         `gorm:"primary_key;type:varchar(39)" json:"id"`
+	FullName       string         `gorm:"full_name;type:varchar(70)" json:"full_name"`
 	Whatsapp       string         `gorm:"uniqueIndex;type:varchar(200)" json:"whatsapp"`
 	Email          string         `gorm:"uniqueIndex;type:varchar(60)" json:"email"`
 	Password       string         `gorm:"password" json:"password"`
