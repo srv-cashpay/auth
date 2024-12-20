@@ -55,13 +55,12 @@ func New() *echo.Echo {
 		auth.POST("/signin", authH.Signin)
 		auth.POST("/refresh", authH.RefreshToken)
 		auth.POST("/authenticator", authH.Authenticator)
-	}
 
-	//reset password
-	e.POST("/resetpassword", resetH.ResetPassword)
-	e.POST("/verify-reset", resetH.VerifyResetPassword)
-	e.POST("/request-reset-password", resetH.RequestResetPassword)
-	e.PUT("/resend-reset", resetH.ResendVerification)
+		auth.POST("/resetpassword", resetH.ResetPassword)
+		auth.POST("/verify-reset", resetH.VerifyResetPassword)
+		auth.POST("/request-reset-password", resetH.RequestResetPassword)
+		auth.PUT("/resend-reset", resetH.ResendVerification)
+	}
 
 	merchant := e.Group("api/merchant", middlewares.AuthorizeJWT(JWT))
 	{
