@@ -6,7 +6,7 @@ require (
 	github.com/joho/godotenv v1.5.1
 	github.com/labstack/echo/v4 v4.12.0
 	github.com/srv-cashpay/middlewares v0.0.0-20241205063440-0179e9f99fa9
-	github.com/srv-cashpay/util v0.0.0-20241027032732-ad63c2c98116
+	github.com/srv-cashpay/util v0.0.0-20241220204257-373030ade444
 	golang.org/x/crypto v0.28.0
 	gopkg.in/gomail.v2 v2.0.0-20160411212932-81ebce5c23df
 	gorm.io/driver/postgres v1.5.9
