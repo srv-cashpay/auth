@@ -19,6 +19,7 @@ type DomainRepository interface {
 	SigninByPhoneNumber(req dto.SigninRequest) (*entity.AccessDoor, error)
 	RefreshToken(req dto.RefreshTokenRequest) (*entity.AccessDoor, error)
 	SaveUser(user *entity.AccessDoor) error
+	Profile(req dto.ProfileRequest) (dto.ProfileResponse, error)
 }
 
 type authRepository struct {

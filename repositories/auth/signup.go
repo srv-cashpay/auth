@@ -5,6 +5,7 @@ import (
 
 	dto "github.com/srv-cashpay/auth/dto/auth"
 	"github.com/srv-cashpay/auth/entity"
+	entitymerchant "github.com/srv-cashpay/merchant/entity"
 	util "github.com/srv-cashpay/util/s"
 )
 
@@ -23,7 +24,7 @@ func (r *authRepository) Signup(req dto.SignupRequest) (dto.SignupResponse, erro
 		return dto.SignupResponse{}, err
 	}
 
-	merchant := entity.MerchantDetail{
+	merchant := entitymerchant.MerchantDetail{
 		ID:         util.GenerateRandomString(),
 		UserID:     user.ID,
 		CurrencyID: 1,

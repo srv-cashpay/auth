@@ -5,6 +5,7 @@ go 1.21.0
 require (
 	github.com/joho/godotenv v1.5.1
 	github.com/labstack/echo/v4 v4.12.0
+	github.com/srv-cashpay/merchant v0.0.0-20250106021400-4ba4bca11e50
 	github.com/srv-cashpay/middlewares v0.0.0-20241205063440-0179e9f99fa9
 	github.com/srv-cashpay/util v0.0.0-20241220204257-373030ade444
 	golang.org/x/crypto v0.28.0
