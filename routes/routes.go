@@ -56,7 +56,7 @@ func New() *echo.Echo {
 	profile := e.Group("api/auth", middlewares.AuthorizeJWT(JWT))
 	{
 		profile.GET("/profile", authH.Profile)
-
+		profile.PUT("/profile/update", authH.UpdateProfile)
 	}
 
 	logout := e.Group("api/logout")

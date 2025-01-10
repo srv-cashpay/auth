@@ -20,6 +20,7 @@ type DomainRepository interface {
 	RefreshToken(req dto.RefreshTokenRequest) (*entity.AccessDoor, error)
 	SaveUser(user *entity.AccessDoor) error
 	Profile(req dto.ProfileRequest) (dto.ProfileResponse, error)
+	UpdateProfile(req dto.UpdateProfileRequest) (dto.UpdateProfileResponse, error)
 }
 
 type authRepository struct {
