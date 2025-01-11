@@ -62,12 +62,12 @@ github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZb
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
 github.com/sirupsen/logrus v1.9.3 h1:dueUQJ1C2q9oE3F7wvmSGAaVtTmUizReu6fjN8uqzbQ=
 github.com/sirupsen/logrus v1.9.3/go.mod h1:naHLuLoDiP4jHNo9R0sCBMtWGeIprob74mVsIT4qYEQ=
-github.com/srv-cashpay/merchant v0.0.0-20250106021400-4ba4bca11e50 h1:VRgkehh1kZS0tbXGNLKqcxYrbKvjUhQYTmkN/JOL7jU=
-github.com/srv-cashpay/merchant v0.0.0-20250106021400-4ba4bca11e50/go.mod h1:S6iNszi8NfCwmNmD+2aKFXFkmrUQAvArI8FAP4Ca0Bw=
+github.com/srv-cashpay/merchant v0.0.0-20250110142533-2e8bca42209a h1:P1HeVnuIEXPJXBobCqsB95v/AdVGD5xdqDqqnyGtwFs=
+github.com/srv-cashpay/merchant v0.0.0-20250110142533-2e8bca42209a/go.mod h1:ZGyzxA3GHAeMJJiD0lAV1IEralYgoK33QvRS8jUHplw=
 github.com/srv-cashpay/middlewares v0.0.0-20241205063440-0179e9f99fa9 h1:pEZ2/EpvX2Zwj12TARRI8/1AqddZ9MwREG8eE/9/Sco=
 github.com/srv-cashpay/middlewares v0.0.0-20241205063440-0179e9f99fa9/go.mod h1:1rc8H+Ph1tH7PQ8OEU/vXjVzOf7Q0KpcFJ6hmkeylL8=
-github.com/srv-cashpay/util v0.0.0-20241220204257-373030ade444 h1:cvF2GdY6EM4F07nep2MKwe1hNv6GWtmGN7mF7XDDkLA=
-github.com/srv-cashpay/util v0.0.0-20241220204257-373030ade444/go.mod h1:Ts3QMxAlJ7m45rvRH9jxxMk4f3pcuTX/WUbFTsEsNkY=
+github.com/srv-cashpay/util v0.0.0-20250108210154-3a9782749bbc h1:VKxxF4QseNiZsFufu0vxDs2jmp+oBI+heDhKYuzCzt0=
+github.com/srv-cashpay/util v0.0.0-20250108210154-3a9782749bbc/go.mod h1:Ts3QMxAlJ7m45rvRH9jxxMk4f3pcuTX/WUbFTsEsNkY=
 github.com/streadway/amqp v1.1.0 h1:py12iX8XSyI7aN/3dUT8DFIDJazNJsVJdxNVEpnQTZM=
 github.com/streadway/amqp v1.1.0/go.mod h1:WYSrTEYHOXHd0nwFeUXAe2G2hRnQT+deZJJf88uS9Bg=
 github.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=
