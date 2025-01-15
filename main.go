@@ -1,9 +1,6 @@
 package main
 
 import (
-	"os"
-
-	"github.com/srv-cashpay/auth/configs/seeder"
 	"github.com/srv-cashpay/auth/routes"
 
 	"github.com/labstack/echo/v4"
@@ -11,11 +8,6 @@ import (
 )
 
 func main() {
-
-	dbEvent := os.Getenv("DBEVENT")
-	if dbEvent == "seeder" {
-		seeder.RunSeeder()
-	}
 
 	e := routes.New()
 	e.Use(middleware.CORS())
