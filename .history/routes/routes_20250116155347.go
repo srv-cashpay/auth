@@ -54,7 +54,9 @@ func New() *echo.Echo {
 	refresh := e.Group("api/auth", middlewares.AuthorizeJWT(JWT))
 	{
 		refresh.POST("/refresh", authH.RefreshToken)
+
 	}
+
 	profile := e.Group("api/auth", middlewares.AuthorizeJWT(JWT))
 	{
 		profile.GET("/profile", authH.Profile)

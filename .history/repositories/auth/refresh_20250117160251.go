@@ -8,7 +8,12 @@ import (
 func (u *authRepository) RefreshToken(req dto.RefreshTokenRequest) (*entity.AccessDoor, error) {
 	var existingUser entity.AccessDoor
 
-	err := u.DB.Preload("Verified").Preload("Merchant").Where("id = ?", req.UserID).First(&existingUser).Error
+	request := dto.RefreshTokenRequest{
+		RefreshToken: req.RefreshToken,
+		UserID:       existingUser.ID,
+	}
+
+	err := u.DB.Where("id = ?", request.UserID).Preload("Verified").Preload("Merchant").First(&existingUser).Error
 	if err != nil {
 		return nil, err
 	}

@@ -20,7 +20,7 @@ func (u *authRepository) Profile(req dto.ProfileRequest) (dto.ProfileResponse, e
 	}
 
 	resp := dto.ProfileResponse{
-		ID:       existingUser.ID,
+		ID:       req.ID,
 		FullName: existingUser.FullName,
 		Whatsapp: existingUser.Whatsapp,
 		Email:    encryptedEmail,

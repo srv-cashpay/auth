@@ -12,7 +12,6 @@ func (u *authService) RefreshAccessToken(req dto.RefreshTokenRequest) (string, e
 	// Validasi refresh token dan dapatkan user ID
 	request := dto.RefreshTokenRequest{
 		RefreshToken: req.RefreshToken,
-		UserID:       req.UserID,
 	}
 
 	user, err := u.Repo.RefreshToken(request)

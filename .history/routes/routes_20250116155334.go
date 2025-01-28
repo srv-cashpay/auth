@@ -51,10 +51,12 @@ func New() *echo.Echo {
 		auth.POST("/request-reset-password", resetH.RequestResetPassword)
 		auth.PUT("/resend-reset", resetH.ResendVerification)
 	}
-	refresh := e.Group("api/auth", middlewares.AuthorizeJWT(JWT))
+	profile := e.Group("api/auth", middlewares.AuthorizeJWT(JWT))
 	{
-		refresh.POST("/refresh", authH.RefreshToken)
+		auth.POST("/refresh", authH.RefreshToken)
+
 	}
+
 	profile := e.Group("api/auth", middlewares.AuthorizeJWT(JWT))
 	{
 		profile.GET("/profile", authH.Profile)

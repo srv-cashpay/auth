@@ -45,6 +45,7 @@ func New() *echo.Echo {
 	{
 		auth.POST("/signup", authH.Signup)
 		auth.POST("/signin", authH.Signin)
+		auth.POST("/refresh", authH.RefreshToken)
 		auth.POST("/authenticator", authH.Authenticator)
 		auth.POST("/resetpassword", resetH.ResetPassword)
 		auth.POST("/verify-reset", resetH.VerifyResetPassword)
@@ -55,6 +56,7 @@ func New() *echo.Echo {
 	{
 		refresh.POST("/refresh", authH.RefreshToken)
 	}
+
 	profile := e.Group("api/auth", middlewares.AuthorizeJWT(JWT))
 	{
 		profile.GET("/profile", authH.Profile)

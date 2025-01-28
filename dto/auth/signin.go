@@ -8,10 +8,13 @@ type SigninRequest struct {
 
 type RefreshTokenRequest struct {
 	RefreshToken string `json:"refresh_token" form:"refresh_token" validate:"required"`
+	UserID       string `json:"user_id"` // Bisa menambahkan UserID untuk validasi lebih lanjut
 }
 
 type RefreshTokenResponse struct {
 	AccessToken string `json:"access_token"`
+	UserID      string `json:"user_id"` // Bisa menambahkan UserID untuk validasi lebih lanjut
+
 }
 
 type SigninResponse struct {

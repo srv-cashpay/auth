@@ -10,12 +10,11 @@ import (
 
 func (u *authService) RefreshAccessToken(req dto.RefreshTokenRequest) (string, error) {
 	// Validasi refresh token dan dapatkan user ID
-	request := dto.RefreshTokenRequest{
+	req = dto.RefreshTokenRequest{
 		RefreshToken: req.RefreshToken,
-		UserID:       req.UserID,
 	}
 
-	user, err := u.Repo.RefreshToken(request)
+	user, err := u.Repo.RefreshToken(req)
 	if err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
 			return "", res.ErrorBuilder(&res.ErrorConstant.RecordNotFound, err)
