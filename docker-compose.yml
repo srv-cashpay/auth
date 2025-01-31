@@ -1,7 +1,6 @@
 version: '3.1'
 
 services:
-
   api_auth:
     restart: always
     container_name: api_auth
@@ -17,37 +16,40 @@ services:
     depends_on:
       - db
     networks:
-      - local
+      - shared_network
 
   db:
-    container_name: db_auth
+    container_name: db_shared
     image: postgres:14-alpine 
     environment: 
       - POSTGRES_USER=${DB_USER}
       - POSTGRES_PASSWORD=${DB_PASSWORD}
       - POSTGRES_DB=${DB_NAME}
     volumes: 
-      - db_data:/var/lib/postgresql
+      - db_data:/var/lib/postgresql/data
     ports:
-      - "5431:5432"
+      - "5432:5432"
     networks:
-      - local
+      - shared_network
 
   elasticsearch:
     image: 'docker.elastic.co/elasticsearch/elasticsearch:7.13.3'
-    container_name: elasticsearchauth
+    container_name: elasticsearch_shared
     environment:
       - discovery.type=single-node
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
     ports:
-      - "9100:9200"
+      - "9200:9200"
     volumes:
       - esdata:/usr/share/elasticsearch/data
+    networks:
+      - shared_network
 
 volumes:
-    db_data:
-    esdata:
-      driver: local
+  db_data:
+  esdata:
+    driver: local
+
 networks:
-  local:
+  shared_network:
     driver: bridge
