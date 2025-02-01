@@ -20,7 +20,7 @@ services:
       - local
 
   db:
-    container_name: db_auth
+    container_name: db
     image: postgres:14-alpine 
     environment: 
       - POSTGRES_USER=${DB_USER}
