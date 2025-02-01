@@ -12,34 +12,34 @@ services:
     volumes:
       - .:/app
     ports:
-      - 2356:2345
+      - "2356:2345"
     depends_on:
       - db
     networks:
       - shared_network
 
   db:
-    container_name: db_shared
-    image: postgres:14-alpine 
-    environment: 
+    container_name: db
+    image: postgres:14-alpine
+    environment:
       - POSTGRES_USER=${DB_USER}
       - POSTGRES_PASSWORD=${DB_PASSWORD}
       - POSTGRES_DB=${DB_NAME}
-    volumes: 
+    volumes:
       - db_data:/var/lib/postgresql/data
     ports:
       - "5431:5432"
     networks:
       - shared_network
 
-  elasticsearch:
+  elasticsearch_auth:
     image: 'docker.elastic.co/elasticsearch/elasticsearch:7.13.3'
-    container_name: elasticsearch_shared
+    container_name: elasticsearch_auth
     environment:
       - discovery.type=single-node
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
     ports:
-      - "9200:9200"
+      - "9100:9200"
     volumes:
       - esdata:/usr/share/elasticsearch/data
     networks:
@@ -48,7 +48,6 @@ services:
 volumes:
   db_data:
   esdata:
-    driver: local
 
 networks:
   shared_network:
