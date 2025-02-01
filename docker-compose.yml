@@ -14,7 +14,7 @@ services:
     volumes:
       - .:/app
     ports:
-      - 2356:2345
+      - 2357:2345
     depends_on:
       - db
     networks:
