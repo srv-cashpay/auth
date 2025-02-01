@@ -36,7 +36,7 @@ services:
 
   # Database (Shared by Both)
   db:
-    container_name: db_main
+    container_name: db_auth
     image: postgres:14-alpine
     environment:
       - POSTGRES_USER=${DB_USER}
