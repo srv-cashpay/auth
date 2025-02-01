@@ -1,38 +1,27 @@
 version: '3.1'
 
 services:
+
+  # API Auth
   api_auth:
     restart: always
     container_name: api_auth
     build:
-      context: ./repo-api-auth
+      context: .
     command: /bin/sh -c "go run main.go"
     stdin_open: true
     tty: true
     volumes:
-      - ./repo-api-auth:/app
+      - .:/app
     ports:
       - 2356:2345
     depends_on:
       - db
     networks:
-      - shared_network
+      - local
 
-  db:
-    container_name: db_auth
-    image: postgres:14-alpine
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=password
-      - POSTGRES_DB=release_dv_cp
-    volumes:
-      - db_auth_data:/var/lib/postgresql
-    ports:
-      - "5432:5432"
-    networks:
-      - shared_network
-
-  elasticsearch:
+  # Elasticsearch untuk API Auth
+  elasticsearch_auth:
     image: 'docker.elastic.co/elasticsearch/elasticsearch:7.13.3'
     container_name: elasticsearch_auth
     environment:
@@ -41,12 +30,31 @@ services:
     ports:
       - "9100:9200"
     volumes:
-      - es_auth_data:/usr/share/elasticsearch/data
+      - esdata_auth:/usr/share/elasticsearch/data
+    networks:
+      - local
+
+  # Database (Shared by Both)
+  db:
+    container_name: db_main
+    image: postgres:14-alpine
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_NAME}
+    volumes:
+      - db_data:/var/lib/postgresql
+    ports:
+      - "5432:5432"
+    networks:
+      - local
 
 volumes:
-  db_auth_data:
-  es_auth_data:
+  esdata_auth:
+    driver: local
+  db_data:
+    driver: local
 
 networks:
-  shared_network:
+  local:
     driver: bridge
