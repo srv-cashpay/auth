@@ -13,10 +13,12 @@ services:
       - .:/app
     ports:
       - 2356:2345
-    depends_on:
-      - db
     networks:
       - shared_network
+
+volumes:
+  esdata:
+    driver: local
 
 networks:
   shared_network:
