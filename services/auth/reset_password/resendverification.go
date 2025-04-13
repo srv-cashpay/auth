@@ -29,7 +29,7 @@ func (u *verifyService) ResendReset(req dto.ResendResetRequest) (*entity.Passwor
 	}
 	user.Otp = resend.Otp
 
-	if err := util.Mailtrap(resend.Email, user.Otp); err != nil {
+	if err := util.Zoho(resend.Email, user.Otp); err != nil {
 		return nil, err
 	}
 

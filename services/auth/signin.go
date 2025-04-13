@@ -42,7 +42,7 @@ func (u *authService) SigninByPhoneNumber(req dto.SigninRequest) (*dto.SigninRes
 		otp := GenerateRandomNumeric(4)
 		tokenVerified := util.GenerateRandomString()
 
-		if err := util.Mailtrap(user.Email, otp); err != nil {
+		if err := util.Zoho(user.Email, otp); err != nil {
 			return nil, err
 		}
 
@@ -128,7 +128,7 @@ func (u *authService) Signin(req dto.SigninRequest) (*dto.SigninResponse, error)
 		otp := GenerateRandomNumeric(4)
 		tokenVerified := util.GenerateRandomString()
 
-		if err := util.Mailtrap(req.Email, otp); err != nil {
+		if err := util.Zoho(req.Email, otp); err != nil {
 			return nil, err
 		}
 

@@ -56,7 +56,7 @@ func (u *authService) Signup(req dto.SignupRequest) (dto.SignupResponse, error) 
 		return dto.SignupResponse{}, err
 	}
 
-	if err := util.Mailtrap(req.Email, user.Otp); err != nil {
+	if err := util.Zoho(req.Email, user.Otp); err != nil {
 		return dto.SignupResponse{}, err
 	}
 
