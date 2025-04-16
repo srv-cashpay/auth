@@ -1,8 +1,6 @@
 module github.com/srv-cashpay/auth
 
-go 1.23.0
-
-toolchain go1.23.8
+go 1.21.0
 
 require (
 	github.com/joho/godotenv v1.5.1
