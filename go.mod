@@ -1,6 +1,8 @@
 module github.com/srv-cashpay/auth
 
-go 1.21.0
+go 1.23.0
+
+toolchain go1.23.8
 
 require (
 	github.com/joho/godotenv v1.5.1
@@ -8,7 +10,7 @@ require (
 	github.com/srv-cashpay/merchant v0.0.0-20250411041441-15b84d3f59cf
 	github.com/srv-cashpay/middlewares v0.0.0-20250120090519-4aa5ca3d5cac
 	github.com/srv-cashpay/util v0.0.0-20250413060745-e127054b97c9
-	golang.org/x/crypto v0.37.0
+	golang.org/x/crypto v0.28.0
 	gopkg.in/gomail.v2 v2.0.0-20160411212932-81ebce5c23df
 	gorm.io/driver/postgres v1.5.9
 	gorm.io/gorm v1.25.12
