@@ -2,7 +2,6 @@ package main
 
 import (
 	"github.com/srv-cashpay/auth/routes"
-	"golang.org/x/crypto/acme/autocert"
 
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
@@ -11,8 +10,6 @@ import (
 func main() {
 
 	e := routes.New()
-	e.AutoTLSManager.Cache = autocert.DirCache(".cache")                      // untuk simpan cert
-	e.AutoTLSManager.HostPolicy = autocert.HostWhitelist("lab.cashpay.my.id") // ganti dengan domainmu
 
 	e.Use(middleware.CORS())
 
