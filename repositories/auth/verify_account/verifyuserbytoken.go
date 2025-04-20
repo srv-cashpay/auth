@@ -2,6 +2,7 @@ package repositories
 
 import (
 	"fmt"
+	"time"
 
 	dto "github.com/srv-cashpay/auth/dto/auth"
 	"github.com/srv-cashpay/auth/entity"
@@ -12,9 +13,11 @@ import (
 
 func (u *verifyRepository) VerifyUserByToken(req dto.VerificationRequest) (*entity.UserVerified, error) {
 	var user entity.UserVerified
+	now := time.Now()
+
 	if err := u.DB.Clauses(clause.OnConflict{
 		Columns:   []clause.Column{{Name: "token"}},
-		DoUpdates: clause.Assignments(map[string]interface{}{"verified": true}),
+		DoUpdates: clause.Assignments(map[string]interface{}{"verified": true, "status_account": true, "trial_end": now.Add(16 * 24 * time.Hour)}),
 	}).Where("token = ?", req.Token).Where("otp = ?", req.Otp).First(&user).Error; err != nil {
 		if err == gorm.ErrRecordNotFound {
 			return nil, fmt.Errorf("User not found with the given verification token")
