@@ -17,7 +17,7 @@ func (u *verifyRepository) VerifyUserByToken(req dto.VerificationRequest) (*enti
 
 	if err := u.DB.Clauses(clause.OnConflict{
 		Columns:   []clause.Column{{Name: "token"}},
-		DoUpdates: clause.Assignments(map[string]interface{}{"verified": true, "status_account": true, "trial_end": now.Add(16 * 24 * time.Hour)}),
+		DoUpdates: clause.Assignments(map[string]interface{}{"verified": true, "status_account": true, "account_expired": now.Add(16 * 24 * time.Hour)}),
 	}).Where("token = ?", req.Token).Where("otp = ?", req.Otp).First(&user).Error; err != nil {
 		if err == gorm.ErrRecordNotFound {
 			return nil, fmt.Errorf("User not found with the given verification token")

@@ -2,6 +2,7 @@ package repositories
 
 import (
 	"fmt"
+	"time"
 
 	"github.com/srv-cashpay/auth/entity"
 )
@@ -15,7 +16,12 @@ func (u *verifyRepository) UpdateUserVerificationStatus(user *entity.UserVerifie
 
 	// In a real-world scenario, you would use a database query to update the user's verification status
 	// Example using GORM:
-	err := u.DB.Model(&entity.UserVerified{}).Where("id = ?", user.ID).Update("verified", true).Error
+	err := u.DB.Model(&entity.UserVerified{}).Where("id = ?", user.ID).
+		Updates(map[string]interface{}{
+			"verified":        true,
+			"status_account":  true,
+			"account_expired": time.Now().Add(16 * 24 * time.Hour),
+		}).Error
 	if err != nil {
 		// Handle the error appropriately (e.g., log it, return it, etc.)
 		return err
