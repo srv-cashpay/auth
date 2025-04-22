@@ -11,8 +11,8 @@ github.com/go-playground/locales v0.14.1 h1:EWaQ/wswjilfKLTECiXz7Rh+3BjFhfDFKv/o
 github.com/go-playground/locales v0.14.1/go.mod h1:hxrqLVvrK65+Rwrd5Fc6F2O76J/NuW9t0sjnWqG1slY=
 github.com/go-playground/universal-translator v0.18.1 h1:Bcnm0ZwsGyWbCzImXv+pAJnYK9S473LQFuzCbDbfSFY=
 github.com/go-playground/universal-translator v0.18.1/go.mod h1:xekY+UJKNuX9WP91TpwSH2VMlDf28Uj24BCp08ZFTUY=
-github.com/go-playground/validator/v10 v10.23.0 h1:/PwmTwZhS0dPkav3cdK9kV1FsAmrL8sThn8IHr/sO+o=
-github.com/go-playground/validator/v10 v10.23.0/go.mod h1:dbuPbCMFw/DrkbEynArYaCwl3amGuJotoKCe95atGMM=
+github.com/go-playground/validator/v10 v10.17.0 h1:SmVVlfAOtlZncTxRuinDPomC2DkXJ4E5T9gDA0AIH74=
+github.com/go-playground/validator/v10 v10.17.0/go.mod h1:9iXMNT7sEkjXb0I+enO7QXmzG6QCsPWY4zveKFVRSyU=
 github.com/golang-jwt/jwt v3.2.2+incompatible h1:IfV12K8xAKAnZqdXVzCZ+TOjboZ2keLg81eXfW3O+oY=
 github.com/golang-jwt/jwt v3.2.2+incompatible/go.mod h1:8pz2t5EyA70fFQQSrl6XZXzqecmYZeUEB8OUGHkxJ+I=
 github.com/golang-jwt/jwt/v4 v4.5.0 h1:7cYmW1XlMY7h7ii7UhUyChSgS5wUJEnm9uZVTGqOWzg=
@@ -64,10 +64,10 @@ github.com/sirupsen/logrus v1.9.3 h1:dueUQJ1C2q9oE3F7wvmSGAaVtTmUizReu6fjN8uqzbQ
 github.com/sirupsen/logrus v1.9.3/go.mod h1:naHLuLoDiP4jHNo9R0sCBMtWGeIprob74mVsIT4qYEQ=
 github.com/srv-cashpay/merchant v0.0.0-20250411041441-15b84d3f59cf h1:7gztWAla8GnoIlqfIxZ1965KmbZAiKWMAQc9pfOLN4Q=
 github.com/srv-cashpay/merchant v0.0.0-20250411041441-15b84d3f59cf/go.mod h1:rXeBDjrGPQqDrbPcbtM822DVowNnyaF4qbjLsaMF3UU=
-github.com/srv-cashpay/middlewares v0.0.0-20250120090519-4aa5ca3d5cac h1:TQ8j+6wzc6G+NVCe1VHkikHuHElhlsLRa0oIwXgMPwE=
-github.com/srv-cashpay/middlewares v0.0.0-20250120090519-4aa5ca3d5cac/go.mod h1:1rc8H+Ph1tH7PQ8OEU/vXjVzOf7Q0KpcFJ6hmkeylL8=
-github.com/srv-cashpay/util v0.0.0-20250419045510-b31c1bbc37f7 h1:eSRcdBAcZYytnjFRSo9gANP0ctvTM/25v6KiA77PbHs=
-github.com/srv-cashpay/util v0.0.0-20250419045510-b31c1bbc37f7/go.mod h1:Ts3QMxAlJ7m45rvRH9jxxMk4f3pcuTX/WUbFTsEsNkY=
+github.com/srv-cashpay/middlewares v0.0.0-20250421061951-7b6fa9b2a4df h1:mm/Wnj/dBCUUr4SL2RSnPlHVbMxo5LA1rQ4uQt+5v18=
+github.com/srv-cashpay/middlewares v0.0.0-20250421061951-7b6fa9b2a4df/go.mod h1:f1cuu5uW9mmtZXaOJ3rBHvtvDOtieLZWmYd1UmBh/CM=
+github.com/srv-cashpay/util v0.0.0-20250422201816-f68d95d15e50 h1:5L7b90aARNYFB29OHEwOoOmAvc0N+XP7e03AaImGMfU=
+github.com/srv-cashpay/util v0.0.0-20250422201816-f68d95d15e50/go.mod h1:h4CTY9IihKNOx8RPh5EfTI+XZO1Fe5verKaOtIAvjX0=
 github.com/streadway/amqp v1.1.0 h1:py12iX8XSyI7aN/3dUT8DFIDJazNJsVJdxNVEpnQTZM=
 github.com/streadway/amqp v1.1.0/go.mod h1:WYSrTEYHOXHd0nwFeUXAe2G2hRnQT+deZJJf88uS9Bg=
 github.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=
