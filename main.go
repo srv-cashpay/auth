@@ -4,31 +4,26 @@ import (
 	"log"
 	"net/http"
 
-	"golang.org/x/crypto/acme/autocert"
+	"github.com/srv-cashpay/auth/routes"
 
 	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
 )
 
 func main() {
-	e := echo.New()
 
-	m := &autocert.Manager{
-		Prompt:     autocert.AcceptTOS,
-		HostPolicy: autocert.HostWhitelist("lab.cashpay.my.id"),
-		Cache:      autocert.DirCache("certs"),
+	e := routes.New()
+	certFile := "/etc/letsencrypt/live/lab.cashpay.my.id/fullchain.pem"
+	keyFile := "/etc/letsencrypt/live/lab.cashpay.my.id/privkey.pem"
+
+	err := http.ListenAndServeTLS(":443", certFile, keyFile, nil)
+	if err != nil {
+		log.Fatal("ListenAndServeTLS error: ", err)
 	}
 
-	go func() {
-		log.Fatal(http.ListenAndServe(":80", m.HTTPHandler(nil)))
-	}()
+	e.Use(middleware.CORS())
 
-	server := &http.Server{
-		Addr:      ":443",
-		Handler:   e,
-		TLSConfig: m.TLSConfig(),
-	}
-
-	log.Fatal(server.ListenAndServeTLS("", ""))
+	e.Logger.Fatal(e.Start(":2345"))
 }
 
 // CORSMiddleware ..
