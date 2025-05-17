@@ -16,8 +16,8 @@ func main() {
 	e.Use(middleware.CORS())
 
 	// Sertifikat Let's Encrypt
-	certFile := "/etc/letsencrypt/live/cashpay.my.id/fullchain.pem"
-	keyFile := "/etc/letsencrypt/live/cashpay.my.id/privkey.pem"
+	certFile := "/certs/cashpay.my.id/fullchain.pem"
+	keyFile := "/certs/cashpay.my.id/privkey.pem"
 
 	// Jalankan HTTPS langsung dari Echo
 	err := e.StartTLS(":443", certFile, keyFile)
