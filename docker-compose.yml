@@ -11,7 +11,7 @@ services:
     tty: true
     volumes:
       - .:/app
-           - /opt/certs:/certs:ro    # Sertifikat HTTPS dimount read-only
+      - /opt/certs:/certs:ro    # Sertifikat HTTPS dimount read-only
 
     ports:
       - 2356:2345
