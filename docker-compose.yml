@@ -11,7 +11,10 @@ services:
     tty: true
     volumes:
       - .:/app
+      - /opt/certs:/certs:ro    # Sertifikat HTTPS dimount read-only
+
     ports:
+      - 443:443                 # Port HTTPS yang sebenarnya
       - 2356:2345
     networks:
       - shared_network
