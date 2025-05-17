@@ -4,51 +4,31 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/srv-cashpay/auth/routes"
 	"golang.org/x/crypto/acme/autocert"
 
 	"github.com/labstack/echo/v4"
-	"github.com/labstack/echo/v4/middleware"
 )
 
-// func main() {
-
-// 	e := routes.New()
-
-// 	e.Use(middleware.CORS())
-
-// 	e.Logger.Fatal(e.Start(":2345"))
-// }
-
 func main() {
+	e := echo.New()
 
-	e := routes.New()
-	e.Use(middleware.CORS())
-
-	// Autocert untuk HTTPS otomatis dari Let's Encrypt
 	m := &autocert.Manager{
 		Prompt:     autocert.AcceptTOS,
-		HostPolicy: autocert.HostWhitelist("cashpay.my.id"), // GANTI dengan domain kamu
-		Cache:      autocert.DirCache("certs"),              // Folder lokal untuk simpan cert
+		HostPolicy: autocert.HostWhitelist("lab.cashpay.my.id"),
+		Cache:      autocert.DirCache("certs"),
 	}
 
-	// Redirect HTTP ke HTTPS di port 80
 	go func() {
-		log.Println("Running HTTP redirect on :80")
-		http.ListenAndServe(":80", m.HTTPHandler(nil))
+		log.Fatal(http.ListenAndServe(":80", m.HTTPHandler(nil)))
 	}()
 
-	// Jalankan server HTTPS di port 443
-	server := http.Server{
+	server := &http.Server{
 		Addr:      ":443",
 		Handler:   e,
 		TLSConfig: m.TLSConfig(),
 	}
 
-	log.Println("Running HTTPS server on :443")
 	log.Fatal(server.ListenAndServeTLS("", ""))
-	e.Logger.Fatal(e.Start(":2345"))
-
 }
 
 // CORSMiddleware ..
