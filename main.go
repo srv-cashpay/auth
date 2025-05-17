@@ -2,7 +2,6 @@ package main
 
 import (
 	"log"
-	"net/http"
 
 	"github.com/srv-cashpay/auth/routes"
 
@@ -13,17 +12,18 @@ import (
 func main() {
 
 	e := routes.New()
-	certFile := "/etc/letsencrypt/live/lab.cashpay.my.id/fullchain.pem"
-	keyFile := "/etc/letsencrypt/live/lab.cashpay.my.id/privkey.pem"
-
-	err := http.ListenAndServeTLS(":443", certFile, keyFile, nil)
-	if err != nil {
-		log.Fatal("ListenAndServeTLS error: ", err)
-	}
 
 	e.Use(middleware.CORS())
 
-	e.Logger.Fatal(e.Start(":2345"))
+	// Sertifikat Let's Encrypt
+	certFile := "/etc/letsencrypt/live/lab.cashpay.my.id/fullchain.pem"
+	keyFile := "/etc/letsencrypt/live/lab.cashpay.my.id/privkey.pem"
+
+	// Jalankan HTTPS langsung dari Echo
+	err := e.StartTLS(":443", certFile, keyFile)
+	if err != nil {
+		log.Fatal("StartTLS error: ", err)
+	}
 }
 
 // CORSMiddleware ..
