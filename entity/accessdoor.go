@@ -11,7 +11,7 @@ type AccessDoor struct {
 	ID             string                `gorm:"primary_key;type:varchar(39)" json:"id"`
 	FullName       string                `gorm:"full_name;type:varchar(70)" json:"full_name"`
 	Whatsapp       string                `gorm:"uniqueIndex;type:varchar(200)" json:"whatsapp"`
-	Email          string                `gorm:"uniqueIndex;type:varchar(60)" json:"email"`
+	Email          string                `gorm:"uniqueIndex;type:varchar(150)" json:"email"`
 	Password       string                `gorm:"password" json:"password"`
 	AccessRoleID   string                `gorm:"access_role_id" json:"access_role_id"`
 	LoginAttempts  int                   `gorm:"login_attempts" json:"login_attempts"`
