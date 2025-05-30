@@ -60,7 +60,6 @@ func InitDB() *gorm.DB {
 		&entity.File{},
 		&entity.ProfilePicture{},
 		&entity.Country{},
-		&entity.Permission{},
 		&entity.Authenticator{},
 		&entity.PasswordResetToken{},
 	)
