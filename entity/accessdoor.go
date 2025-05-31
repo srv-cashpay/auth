@@ -21,6 +21,9 @@ type AccessDoor struct {
 	ProfilePicture ProfilePicture        `json:"profile_picture" gorm:"foreignKey:UserID"`
 	Verified       UserVerified          `json:"verified" gorm:"foreignKey:UserID"`
 	File           []File                `json:"file" gorm:"foreignKey:UserID"`
+	CreatedBy      string                `gorm:"created_by" json:"created_by"`
+	UpdatedBy      string                `gorm:"updated_by" json:"updated_by"`
+	DeletedBy      string                `gorm:"deleted_by" json:"deleted_by"`
 	CreatedAt      time.Time             `json:"created_at"`
 	UpdatedAt      time.Time             `json:"updated_at"`
 	DeletedAt      gorm.DeletedAt        `gorm:"index" json:"deleted_at"`
