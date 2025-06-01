@@ -17,6 +17,15 @@ func (u *authService) UpdateProfile(req dto.UpdateProfileRequest) (dto.UpdatePro
 		UpdatedBy: req.UpdatedBy,
 	}
 
+	// Encrypt email if provided
+	if req.Email != "" {
+		encryptedEmail, err := util.Encrypt(req.Email)
+		if err != nil {
+			return dto.UpdateProfileResponse{}, fmt.Errorf("failed to encrypt email: %w", err)
+		}
+		request.Email = string(encryptedEmail)
+	}
+
 	// Encrypt password if provided
 	if req.Password != "" {
 		encryptedPassword, err := util.GenerateFromPassword(req.Password)
