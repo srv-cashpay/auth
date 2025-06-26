@@ -26,6 +26,15 @@ func (u *authService) UpdateProfile(req dto.UpdateProfileRequest) (dto.UpdatePro
 		request.Email = string(encryptedEmail)
 	}
 
+	// Encrypt email if provided
+	if req.Whatsapp != "" {
+		encryptedWhatsapp, err := util.Encrypt(req.Whatsapp)
+		if err != nil {
+			return dto.UpdateProfileResponse{}, fmt.Errorf("failed to encrypt Whatsapp: %w", err)
+		}
+		request.Whatsapp = string(encryptedWhatsapp)
+	}
+
 	// Encrypt password if provided
 	if req.Password != "" {
 		encryptedPassword, err := util.GenerateFromPassword(req.Password)

@@ -19,10 +19,16 @@ func (u *authRepository) Profile(req dto.ProfileRequest) (dto.ProfileResponse, e
 		return dto.ProfileResponse{}, err
 	}
 
+	// Encrypt the email
+	encryptedWhatsapp, err := util.Decrypt(existingUser.Whatsapp)
+	if err != nil {
+		return dto.ProfileResponse{}, err
+	}
+
 	resp := dto.ProfileResponse{
 		ID:       existingUser.ID,
 		FullName: existingUser.FullName,
-		Whatsapp: existingUser.Whatsapp,
+		Whatsapp: encryptedWhatsapp,
 		Email:    encryptedEmail,
 	}
 
