@@ -21,6 +21,15 @@ func (u *authService) SigninByPhoneNumber(req dto.SigninRequest) (*dto.SigninRes
 
 	req.Whatsapp = FormatWhatsappNumber(req.Whatsapp)
 
+	// Encrypt the Whatsapp
+	encryptedWhatsapp, err := util.Encrypt(req.Whatsapp)
+	if err != nil {
+		return nil, res.ErrorBuilder(&res.ErrorConstant.InternalServerError, err)
+	}
+
+	// Set the encrypted Whatsapp in the request
+	req.Whatsapp = encryptedWhatsapp
+
 	user, err := u.Repo.SigninByPhoneNumber(req)
 	if err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
