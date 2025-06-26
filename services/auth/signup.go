@@ -28,6 +28,12 @@ func (u *authService) Signup(req dto.SignupRequest) (dto.SignupResponse, error) 
 		return dto.SignupResponse{}, res.ErrorBuilder(&res.ErrorConstant.InternalServerError, err)
 	}
 
+	// Encrypt the email
+	encryptedWhatsapp, err := util.Encrypt(req.Whatsapp)
+	if err != nil {
+		return dto.SignupResponse{}, res.ErrorBuilder(&res.ErrorConstant.InternalServerError, err)
+	}
+
 	// Proceed with the signup process
 	encryp := util.EncryptPassword(&req)
 	if encryp != nil {
@@ -43,7 +49,7 @@ func (u *authService) Signup(req dto.SignupRequest) (dto.SignupResponse, error) 
 	user := dto.SignupRequest{
 		ID:           secureID,
 		Otp:          GenerateRandomNumeric(4),
-		Whatsapp:     req.Whatsapp,
+		Whatsapp:     encryptedWhatsapp,
 		FullName:     req.FullName,
 		Email:        encryptedEmail,
 		Password:     req.Password,
