@@ -2,14 +2,23 @@ package main
 
 import (
 	"log"
+	"os"
 
 	"github.com/srv-cashpay/auth/routes"
+	"github.com/srv-cashpay/util/s/elasticsearch"
 
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 )
 
 func main() {
+
+	elasticsearch.Init()
+	if elasticsearch.Client == nil {
+		log.Println("[ERROR] Elasticsearch client is nil after Init()")
+		os.Exit(1)
+	}
+	log.Println("[INFO] Elasticsearch initialized successfully")
 
 	e := routes.New()
 
