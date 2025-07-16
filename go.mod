@@ -9,7 +9,6 @@ require (
 	github.com/labstack/echo/v4 v4.12.0
 	github.com/srv-cashpay/merchant v0.0.0-20250411041441-15b84d3f59cf
 	github.com/srv-cashpay/middlewares v0.0.0-20250421061951-7b6fa9b2a4df
-	github.com/srv-cashpay/util v0.0.0-20250422201816-f68d95d15e50
 	golang.org/x/crypto v0.28.0
 	gopkg.in/gomail.v2 v2.0.0-20160411212932-81ebce5c23df
 	gorm.io/driver/postgres v1.5.9
@@ -28,6 +27,7 @@ require (
 	github.com/olivere/elastic/v7 v7.0.32 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/sirupsen/logrus v1.9.3 // indirect
+	github.com/srv-cashpay/util v0.0.0-20250716052955-e2e8af3139a5 // indirect
 	github.com/teris-io/shortid v0.0.0-20220617161101-71ec9f2aa569 // indirect
 	golang.org/x/text v0.24.0 // indirect
 	golang.org/x/time v0.5.0 // indirect
