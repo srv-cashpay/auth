@@ -17,26 +17,8 @@ services:
       - 2356:2345
     networks:
       - shared_network
-    depends_on:
-      - elasticsearch
-
-  elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.13.3
-    container_name: elasticsearchauth
-    environment:
-      - discovery.type=single-node
-      - xpack.security.enabled=false
-      - ES_JAVA_OPTS=-Xms512m -Xmx512m
-    ports:
-      - 9500:9200
-    volumes:
-      - esdata:/usr/share/elasticsearch/data
-    networks:
-      - shared_network
-
-volumes:
-  esdata:
-    driver: local
+    env_file:
+      - .env
 
 networks:
   shared_network:
