@@ -40,6 +40,7 @@ func (s *authService) SignInWithGoogle(req dto.GoogleSignInRequest) (*dto.AuthRe
 		user = &entity.AccessDoor{
 			ID:           secureID,
 			Email:        encryptedEmail,
+			Whatsapp:     req.Whatsapp,
 			FullName:     name,
 			Provider:     "google",
 			AccessRoleID: "e9Wl2JyVeBM_", // ganti sesuai role
@@ -59,6 +60,7 @@ func (s *authService) SignInWithGoogle(req dto.GoogleSignInRequest) (*dto.AuthRe
 		ID:            user.ID,
 		MerchantID:    user.Merchant.ID,
 		FullName:      user.FullName,
+		Whatsapp:      user.Whatsapp,
 		Email:         user.Email,
 		Token:         token,
 		RefreshToken:  refreshtoken,

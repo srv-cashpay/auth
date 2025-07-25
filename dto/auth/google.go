@@ -1,12 +1,14 @@
 package auth
 
 type GoogleSignInRequest struct {
-	IdToken string `json:"idToken" validate:"required"`
+	IdToken  string `json:"idToken" validate:"required"`
+	Whatsapp string `json:"whatsapp" form:"whatsapp" validate:"required,whatsapp"`
 }
 
 type AuthResponse struct {
 	ID            string `json:"id"`
 	MerchantID    string `json:"merchant_id"`
+	Whatsapp      string `json:"whatsapp"`
 	FullName      string `json:"full_name"`
 	Email         string `json:"email"`
 	Token         string `json:"token"`
