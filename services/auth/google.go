@@ -3,10 +3,11 @@ package auth
 import (
 	"context"
 	"errors"
-	"fmt"
 
 	dto "github.com/srv-cashpay/auth/dto/auth"
 	"github.com/srv-cashpay/auth/entity"
+	util "github.com/srv-cashpay/util/s"
+	res "github.com/srv-cashpay/util/s/response"
 	"google.golang.org/api/idtoken"
 )
 
@@ -35,7 +36,10 @@ func (s *authService) SignInWithGoogle(req dto.GoogleSignInRequest) (*dto.AuthRe
 	}
 
 	// Simulasi pembuatan token (gunakan JWT sungguhan di produksi)
-	token := fmt.Sprintf("simulated-jwt-for-%s", user.Email)
+	token, err := util.Decrypt(user.Email)
+	if err != nil {
+		return nil, res.ErrorBuilder(&res.ErrorConstant.InternalServerError, err)
+	}
 
 	return &dto.AuthResponse{Token: token}, nil
 }
