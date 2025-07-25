@@ -34,10 +34,11 @@ func (s *authService) SignInWithGoogle(req dto.GoogleSignInRequest) (*dto.AuthRe
 	user, err := s.Repo.FindByEmail(email)
 	if err != nil {
 		user = &entity.AccessDoor{
-			ID:       secureID, // bisa diganti UUID
-			Email:    encryptedEmail,
-			FullName: name,
-			Provider: "google",
+			ID:           secureID, // bisa diganti UUID
+			Email:        encryptedEmail,
+			FullName:     name,
+			Provider:     "google",
+			AccessRoleID: "e9Wl2JyVeBM_",
 		}
 		_ = s.Repo.Create(user)
 	}

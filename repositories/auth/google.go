@@ -20,6 +20,7 @@ func (r *authRepository) FindByEmail(email string) (*entity.AccessDoor, error) {
 		}
 		return nil, err
 	}
+
 	return &user, nil
 }
 

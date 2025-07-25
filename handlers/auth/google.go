@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	dto "github.com/srv-cashpay/auth/dto/auth"
+	res "github.com/srv-cashpay/util/s/response"
 
 	"github.com/labstack/echo/v4"
 )
@@ -18,6 +19,6 @@ func (h *domainHandler) GoogleSignIn(c echo.Context) error {
 	if err != nil {
 		return c.JSON(http.StatusUnauthorized, map[string]string{"error": err.Error()})
 	}
+	return res.SuccessResponse(resp).Send(c)
 
-	return c.JSON(http.StatusOK, resp)
 }
