@@ -2,6 +2,7 @@ package auth
 
 import (
 	"errors"
+	"time"
 
 	"github.com/srv-cashpay/auth/entity"
 	entitymerchant "github.com/srv-cashpay/merchant/entity"
@@ -34,6 +35,17 @@ func (r *authRepository) Create(user *entity.AccessDoor) error {
 	}
 
 	if err := r.DB.Save(&merchant).First(&merchant).Error; err != nil {
+		return nil
+	}
+
+	verified := entity.UserVerified{
+		ID:        merchant.ID,
+		UserID:    merchant.ID,
+		Token:     util.GenerateRandomString(),
+		ExpiredAt: time.Now().Add(4 * time.Minute),
+	}
+
+	if err := r.DB.Save(&verified).First(&verified).Error; err != nil {
 		return nil
 	}
 
