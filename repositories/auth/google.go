@@ -39,8 +39,8 @@ func (r *authRepository) Create(user *entity.AccessDoor) error {
 	}
 
 	verified := entity.UserVerified{
-		ID:        merchant.ID,
-		UserID:    merchant.UserID,
+		ID:        util.GenerateRandomString(),
+		UserID:    merchant.ID,
 		Token:     util.GenerateRandomString(),
 		ExpiredAt: time.Now().Add(4 * time.Minute),
 	}
