@@ -6,6 +6,7 @@ import (
 
 	dto "github.com/srv-cashpay/auth/dto/auth"
 	"github.com/srv-cashpay/auth/entity"
+	util "github.com/srv-cashpay/util/s"
 	"google.golang.org/api/idtoken"
 )
 
@@ -26,12 +27,15 @@ func (s *authService) SignInWithGoogle(req dto.GoogleSignInRequest) (*dto.AuthRe
 	if err != nil {
 		return nil, errors.New("id null")
 	}
-
+	encryptedEmail, err := util.Encrypt(email)
+	if err != nil {
+		return nil, err
+	}
 	user, err := s.Repo.FindByEmail(email)
 	if err != nil {
 		user = &entity.AccessDoor{
 			ID:       secureID, // bisa diganti UUID
-			Email:    email,
+			Email:    encryptedEmail,
 			FullName: name,
 			Provider: "google",
 		}
