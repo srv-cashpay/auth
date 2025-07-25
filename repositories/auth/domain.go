@@ -21,6 +21,8 @@ type DomainRepository interface {
 	SaveUser(user *entity.AccessDoor) error
 	Profile(req dto.ProfileRequest) (dto.ProfileResponse, error)
 	UpdateProfile(req dto.UpdateProfileRequest) (dto.UpdateProfileResponse, error)
+	FindByEmail(email string) (*entity.AccessDoor, error)
+	Create(user *entity.AccessDoor) error
 }
 
 type authRepository struct {

@@ -39,6 +39,7 @@ func New() *echo.Echo {
 	e := echo.New()
 	e.POST("/verify", verifyH.HandleVerification)
 	e.PUT("/resend-otp", verifyH.ResendVerification)
+	e.POST("/google", authH.GoogleSignIn)
 	// e.POST("/authenticator-admin", verifyH.AuthenticatorAdmin)
 
 	auth := e.Group("api/auth", middlewares.ApiKeyMiddleware)

@@ -15,6 +15,7 @@ type AuthService interface {
 	Profile(req dto.ProfileRequest) (dto.ProfileResponse, error)
 	UpdateProfile(req dto.UpdateProfileRequest) (dto.UpdateProfileResponse, error)
 	RefreshAccessToken(req dto.RefreshTokenRequest) (string, error)
+	SignInWithGoogle(req dto.GoogleSignInRequest) (*dto.AuthResponse, error)
 }
 
 type authService struct {

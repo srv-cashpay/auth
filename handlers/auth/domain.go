@@ -14,7 +14,7 @@ type DomainHandler interface {
 	Authenticator(c echo.Context) error //Authenticator
 	Profile(c echo.Context) error       //Profile
 	UpdateProfile(c echo.Context) error //UpdateProfile
-
+	GoogleSignIn(c echo.Context) error
 }
 
 type domainHandler struct {
