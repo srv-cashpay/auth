@@ -4,6 +4,7 @@ import (
 	"errors"
 
 	"github.com/srv-cashpay/auth/entity"
+	entitymerchant "github.com/srv-cashpay/merchant/entity"
 	util "github.com/srv-cashpay/util/s"
 	"gorm.io/gorm"
 )
@@ -25,5 +26,16 @@ func (r *authRepository) FindByEmail(email string) (*entity.AccessDoor, error) {
 }
 
 func (r *authRepository) Create(user *entity.AccessDoor) error {
+
+	merchant := entitymerchant.MerchantDetail{
+		ID:         util.GenerateRandomString(),
+		UserID:     user.ID,
+		CurrencyID: 1,
+	}
+
+	if err := r.DB.Save(&merchant).First(&merchant).Error; err != nil {
+		return nil
+	}
+
 	return r.DB.Create(user).Error
 }

@@ -48,6 +48,7 @@ func (s *authService) SignInWithGoogle(req dto.GoogleSignInRequest) (*dto.AuthRe
 		if err := s.Repo.Create(user); err != nil {
 			return nil, err
 		}
+
 	}
 
 	// Simulasi token, ganti dengan JWT di produksi
