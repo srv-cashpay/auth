@@ -28,10 +28,15 @@ func (s *authService) SignInWithGoogle(req dto.GoogleSignInRequest) (*dto.AuthRe
 		return nil, err
 	}
 
+	encryptedWhatsapp, err := util.Encrypt(req.Whatsapp)
+	if err != nil {
+		return nil, err
+	}
+
 	// Cari user by email terenkripsi
 	user, err := s.Repo.FindByEmail(email)
 	if err != nil {
-		// Kalau belum ada user → buat user baru
+		// Belum ada → buat user baru
 		secureID, err := generateSecureID()
 		if err != nil {
 			return nil, errors.New("failed to generate secure ID")
@@ -40,16 +45,23 @@ func (s *authService) SignInWithGoogle(req dto.GoogleSignInRequest) (*dto.AuthRe
 		user = &entity.AccessDoor{
 			ID:           secureID,
 			Email:        encryptedEmail,
-			Whatsapp:     req.Whatsapp,
 			FullName:     name,
 			Provider:     "google",
-			AccessRoleID: "e9Wl2JyVeBM_", // ganti sesuai role
+			AccessRoleID: "e9Wl2JyVeBM_", // default role
+			Whatsapp:     encryptedWhatsapp,
 		}
 
 		if err := s.Repo.Create(user); err != nil {
 			return nil, err
 		}
-
+	} else {
+		// Jika user sudah ada, update WhatsApp jika kosong
+		if user.Whatsapp == "" {
+			user.Whatsapp = req.Whatsapp
+			if err := s.Repo.UpdateWhatsapp(user.ID, req.Whatsapp); err != nil {
+				return nil, err
+			}
+		}
 	}
 
 	// Simulasi token, ganti dengan JWT di produksi

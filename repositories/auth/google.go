@@ -39,3 +39,7 @@ func (r *authRepository) Create(user *entity.AccessDoor) error {
 
 	return r.DB.Create(user).Error
 }
+
+func (r *authRepository) UpdateWhatsapp(userID string, phone string) error {
+	return r.DB.Model(&entity.AccessDoor{}).Where("id = ?", userID).Update("whatsapp", phone).Error
+}
