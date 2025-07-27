@@ -35,7 +35,7 @@ func (s *authService) SignInWithGoogle(req dto.GoogleSignInRequest) (*dto.AuthRe
 	}
 
 	// Cari user by email terenkripsi
-	user, err := s.Repo.FindByEmail(encryptedWhatsapp)
+	user, err := s.Repo.FindByEmail(encryptedEmail)
 	if err != nil {
 		// Belum ada → buat user baru
 		secureID, err := generateSecureID()
