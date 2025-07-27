@@ -17,7 +17,7 @@ func (h *domainHandler) GoogleSignIn(c echo.Context) error {
 
 	resp, err := h.serviceAuth.SignInWithGoogle(req)
 	if err != nil {
-		return c.JSON(http.StatusUnauthorized, map[string]string{"error": err.Error()})
+		return c.JSON(http.StatusUnauthorized, map[string]string{"error": "Response"})
 	}
 	return res.SuccessResponse(resp).Send(c)
 
