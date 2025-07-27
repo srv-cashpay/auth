@@ -16,7 +16,10 @@ func (r *authRepository) FindByEmail(email string) (*entity.AccessDoor, error) {
 	if err != nil {
 		return nil, err
 	}
-	if err := r.DB.Where("email = ?", decryptEmail).First(&user).Error; err != nil {
+	if err := r.DB.
+		Preload("Merchant").
+		Preload("Verified").
+		Where("email = ?", decryptEmail).First(&user).Error; err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
 			return nil, errors.New("user not found")
 		}
@@ -37,7 +40,7 @@ func (r *authRepository) Create(user *entity.AccessDoor) error {
 		UserID:     user.ID,
 		CurrencyID: 1,
 	}
-	if err := r.DB.Create(&merchant).Error; err != nil {
+	if err := r.DB.Save(&merchant).Error; err != nil {
 		return err
 	}
 
