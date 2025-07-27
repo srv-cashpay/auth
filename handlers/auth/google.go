@@ -10,11 +10,13 @@ import (
 
 func (h *domainHandler) GoogleSignIn(c echo.Context) error {
 	var req dto.GoogleSignInRequest
-	if err := c.Bind(&req); err != nil {
+	var resp *dto.AuthResponse
+
+	err := c.Bind(&req)
+	if err != nil {
 		return res.ErrorBuilder(&res.ErrorConstant.BadRequest, err).Send(c)
 	}
-
-	resp, err := h.serviceAuth.SignInWithGoogle(req)
+	resp, err = h.serviceAuth.SignInWithGoogle(req)
 	if err != nil {
 		if util.IsDuplicateEntryError(err) {
 			return res.ErrorResponse(&res.ErrorConstant.Duplicate).Send(c)
