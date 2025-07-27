@@ -16,6 +16,7 @@ func (h *domainHandler) GoogleSignIn(c echo.Context) error {
 	if err != nil {
 		return res.ErrorBuilder(&res.ErrorConstant.BadRequest, err).Send(c)
 	}
+
 	resp, err = h.serviceAuth.SignInWithGoogle(req)
 	if err != nil {
 		if util.IsDuplicateEntryError(err) {
@@ -23,6 +24,7 @@ func (h *domainHandler) GoogleSignIn(c echo.Context) error {
 		}
 		return res.ErrorResponse(err).Send(c)
 	}
+
 	return res.SuccessResponse(resp).Send(c)
 
 }
