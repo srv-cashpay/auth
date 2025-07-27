@@ -11,6 +11,7 @@ import (
 )
 
 func (s *authService) SignInWithGoogle(req dto.GoogleSignInRequest) (*dto.AuthResponse, error) {
+	// 1. Validasi ID token dari Google
 	payload, err := idtoken.Validate(context.Background(), req.IdToken, "")
 	if err != nil {
 		return nil, err
@@ -22,19 +23,28 @@ func (s *authService) SignInWithGoogle(req dto.GoogleSignInRequest) (*dto.AuthRe
 	}
 	name, _ := payload.Claims["name"].(string)
 
-	// Enkripsi hanya sekali
+	// 2. Enkripsi email untuk query dan simpan
 	encryptedEmail, err := util.Encrypt(email)
 	if err != nil {
 		return nil, err
 	}
 
-	// Cari user berdasarkan email terenkripsi
+	// 3. Cek apakah user sudah ada
 	user, err := s.Repo.FindByEncryptedEmail(encryptedEmail)
 	if err != nil && err.Error() == "user not found" {
-		// Buat user baru
+		// 4. Jika user belum ada, buat user baru
+		if req.Whatsapp == "" {
+			// Tidak bisa buat akun tanpa WhatsApp
+			return &dto.AuthResponse{
+				FullName: name,
+				Email:    encryptedEmail,
+				Whatsapp: "", // <- tanda frontend untuk arahkan ke input WhatsApp
+			}, nil
+		}
+
 		secureID, err := generateSecureID()
 		if err != nil {
-			return nil, errors.New("failed to generate secure ID")
+			return nil, err
 		}
 
 		encryptedWhatsapp, err := util.Encrypt(req.Whatsapp)
@@ -47,7 +57,7 @@ func (s *authService) SignInWithGoogle(req dto.GoogleSignInRequest) (*dto.AuthRe
 			Email:        encryptedEmail,
 			FullName:     name,
 			Provider:     "google",
-			AccessRoleID: "e9Wl2JyVeBM_", // default role
+			AccessRoleID: "e9Wl2JyVeBM_",
 			Whatsapp:     encryptedWhatsapp,
 		}
 
@@ -55,7 +65,7 @@ func (s *authService) SignInWithGoogle(req dto.GoogleSignInRequest) (*dto.AuthRe
 			return nil, err
 		}
 
-		// Ambil user baru yang sudah disimpan dan preload merchant
+		// Reload dengan preload relasi
 		user, err = s.Repo.FindByEncryptedEmail(encryptedEmail)
 		if err != nil {
 			return nil, err
@@ -64,8 +74,8 @@ func (s *authService) SignInWithGoogle(req dto.GoogleSignInRequest) (*dto.AuthRe
 		// Error lainnya
 		return nil, err
 	} else {
-		// Jika sudah ada dan WhatsApp kosong → update
-		if user.Whatsapp == "" && req.Whatsapp != "" {
+		// 5. Jika user sudah ada tapi WhatsApp masih kosong dan request bawa WA
+		if user.Whatsapp == "/bvTmYgHVZjVt85fktdsXA==" && req.Whatsapp != "/bvTmYgHVZjVt85fktdsXA==" {
 			if err := s.Repo.UpdateWhatsapp(user.ID, req.Whatsapp); err != nil {
 				return nil, err
 			}
@@ -73,7 +83,7 @@ func (s *authService) SignInWithGoogle(req dto.GoogleSignInRequest) (*dto.AuthRe
 		}
 	}
 
-	// Generate token
+	// 6. Generate token
 	token, err := s.jwt.GenerateToken(user.ID, user.FullName, user.Merchant.ID)
 	if err != nil {
 		return nil, err
@@ -83,6 +93,7 @@ func (s *authService) SignInWithGoogle(req dto.GoogleSignInRequest) (*dto.AuthRe
 		return nil, err
 	}
 
+	// 7. Kembalikan response
 	return &dto.AuthResponse{
 		ID:            user.ID,
 		MerchantID:    user.Merchant.ID,
