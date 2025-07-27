@@ -29,7 +29,6 @@ func (r *authRepository) FindByEmail(email string) (*entity.AccessDoor, error) {
 	return &user, nil
 }
 func (r *authRepository) Create(user *entity.AccessDoor) error {
-	// 1. Simpan user terlebih dahulu ke access_doors
 	if err := r.DB.Create(user).Error; err != nil {
 		return err
 	}
