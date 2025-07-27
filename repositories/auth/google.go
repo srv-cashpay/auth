@@ -14,14 +14,14 @@ import (
 
 func (r *authRepository) FindByEmail(email string) (*entity.AccessDoor, error) {
 	var user entity.AccessDoor
-	// decryptEmail, err := util.Decrypt(email)
-	// if err != nil {
-	// 	return nil, err
-	// }
+	decryptEmail, err := util.Decrypt(email)
+	if err != nil {
+		return nil, err
+	}
 	if err := r.DB.
 		Preload("Merchant").
 		Preload("Verified").
-		Where("email = ?", email).First(&user).Error; err != nil {
+		Where("email = ?", decryptEmail).First(&user).Error; err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
 			return nil, errors.New("user not found")
 		}
