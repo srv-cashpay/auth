@@ -34,18 +34,18 @@ func (r *authRepository) Create(user *entity.AccessDoor) error {
 		CurrencyID: 1,
 	}
 
-	if err := r.DB.Save(&merchant).First(&merchant).Error; err != nil {
+	if err := r.DB.Save(&merchant).Error; err != nil {
 		return nil
 	}
 
 	verified := entity.UserVerified{
 		ID:        util.GenerateRandomString(),
-		UserID:    merchant.UserID,
+		UserID:    user.ID,
 		Token:     util.GenerateRandomString(),
 		ExpiredAt: time.Now().Add(4 * time.Minute),
 	}
 
-	if err := r.DB.Save(&verified).First(&verified).Error; err != nil {
+	if err := r.DB.Save(&verified).Error; err != nil {
 		return nil
 	}
 
