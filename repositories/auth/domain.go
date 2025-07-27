@@ -21,7 +21,7 @@ type DomainRepository interface {
 	SaveUser(user *entity.AccessDoor) error
 	Profile(req dto.ProfileRequest) (dto.ProfileResponse, error)
 	UpdateProfile(req dto.UpdateProfileRequest) (dto.UpdateProfileResponse, error)
-	FindByEmail(email string) (*entity.AccessDoor, error)
+	FindByEncryptedEmail(encryptedEmail string) (*entity.AccessDoor, error)
 	Create(user *entity.AccessDoor) error
 	UpdateWhatsapp(userID string, phone string) error
 }
