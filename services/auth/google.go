@@ -7,6 +7,7 @@ import (
 	dto "github.com/srv-cashpay/auth/dto/auth"
 	"github.com/srv-cashpay/auth/entity"
 	util "github.com/srv-cashpay/util/s"
+	res "github.com/srv-cashpay/util/s/response"
 	"google.golang.org/api/idtoken"
 )
 
@@ -52,8 +53,12 @@ func (s *authService) SignInWithGoogle(req dto.GoogleSignInRequest) (*dto.AuthRe
 		}
 
 		if err := s.Repo.Create(user); err != nil {
+			if err.Error() == "duplicate_entry" {
+				return nil, res.ErrorResponse(&res.ErrorConstant.Duplicate)
+			}
 			return nil, err
 		}
+
 	} else {
 		// Jika user sudah ada, update WhatsApp jika kosong
 		if user.Whatsapp == "" {
