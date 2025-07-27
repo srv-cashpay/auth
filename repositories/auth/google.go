@@ -4,6 +4,8 @@ import (
 	"errors"
 	"time"
 
+	res "github.com/srv-cashpay/util/s/response"
+
 	"github.com/srv-cashpay/auth/entity"
 	entitymerchant "github.com/srv-cashpay/merchant/entity"
 	util "github.com/srv-cashpay/util/s"
@@ -30,7 +32,7 @@ func (r *authRepository) FindByEmail(email string) (*entity.AccessDoor, error) {
 }
 func (r *authRepository) Create(user *entity.AccessDoor) error {
 	if err := r.DB.Create(user).Error; err != nil {
-		return err
+		return res.ErrorResponse(&res.ErrorConstant.Duplicate)
 	}
 
 	// 2. Simpan merchant
