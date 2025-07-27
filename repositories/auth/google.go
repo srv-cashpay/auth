@@ -25,31 +25,34 @@ func (r *authRepository) FindByEmail(email string) (*entity.AccessDoor, error) {
 
 	return &user, nil
 }
-
 func (r *authRepository) Create(user *entity.AccessDoor) error {
+	// 1. Simpan user terlebih dahulu ke access_doors
+	if err := r.DB.Create(user).Error; err != nil {
+		return err
+	}
 
+	// 2. Simpan merchant
 	merchant := entitymerchant.MerchantDetail{
 		ID:         util.GenerateRandomString(),
 		UserID:     user.ID,
 		CurrencyID: 1,
 	}
-
-	if err := r.DB.Save(&merchant).Error; err != nil {
-		return nil
+	if err := r.DB.Create(&merchant).Error; err != nil {
+		return err
 	}
 
+	// 3. Simpan user_verified
 	verified := entity.UserVerified{
 		ID:        util.GenerateRandomString(),
 		UserID:    user.ID,
 		Token:     util.GenerateRandomString(),
 		ExpiredAt: time.Now().Add(4 * time.Minute),
 	}
-
-	if err := r.DB.Save(&verified).Error; err != nil {
-		return nil
+	if err := r.DB.Create(&verified).Error; err != nil {
+		return err
 	}
 
-	return r.DB.Create(user).Error
+	return nil
 }
 
 func (r *authRepository) UpdateWhatsapp(userID string, phone string) error {
