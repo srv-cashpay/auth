@@ -11,7 +11,6 @@ type ResetHandler interface {
 	RequestResetPassword(c echo.Context) error //request reset password
 	ResetPassword(c echo.Context) error        //reset password
 	ResendVerification(c echo.Context) error   //resend code
-
 }
 
 type resetHandler struct {

@@ -15,6 +15,8 @@ import (
 	h_verifyReset "github.com/srv-cashpay/auth/handlers/auth/reset_password"
 	r_verifyReset "github.com/srv-cashpay/auth/repositories/auth/reset_password"
 	s_verifyReset "github.com/srv-cashpay/auth/services/auth/reset_password"
+
+	h_location "github.com/srv-cashpay/auth/location"
 )
 
 var (
@@ -40,6 +42,8 @@ func New() *echo.Echo {
 	e.POST("/verify", verifyH.HandleVerification)
 	e.PUT("/resend-otp", verifyH.ResendVerification)
 	e.POST("/google", authH.GoogleSignIn)
+	e.GET("/get-data-location", h_location.GetLocationData)
+
 	// e.POST("/authenticator-admin", verifyH.AuthenticatorAdmin)
 
 	auth := e.Group("api/auth", middlewares.ApiKeyMiddleware)
