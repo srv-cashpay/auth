@@ -2,6 +2,7 @@ package location
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 
 	"github.com/labstack/echo/v4"
@@ -25,7 +26,12 @@ type IPGeoLocation struct {
 }
 
 func GetLocationData(c echo.Context) error {
-	resp, err := http.Get("http://ip-api.com/json/")
+	ip := c.RealIP() // Ini ambil IP client dari header/request
+
+	// Panggil ip-api dengan IP tersebut
+	url := fmt.Sprintf("http://ip-api.com/json/%s", ip)
+
+	resp, err := http.Get(url)
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, echo.Map{"error": "Failed to fetch IP data"})
 	}
