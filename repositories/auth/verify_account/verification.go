@@ -20,7 +20,7 @@ func (u *verifyRepository) UpdateUserVerificationStatus(user *entity.UserVerifie
 		Updates(map[string]interface{}{
 			"verified":        true,
 			"status_account":  true,
-			"account_expired": time.Now().Add(16 * 24 * time.Hour),
+			"account_expired": time.Now().AddDate(0, 6, 0), //.Add(16 * 24 * time.Hour) 16 hari
 		}).Error
 	if err != nil {
 		// Handle the error appropriately (e.g., log it, return it, etc.)
