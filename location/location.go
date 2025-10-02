@@ -25,6 +25,16 @@ type IPGeoLocation struct {
 	Query       string  `json:"query"`
 }
 
+type Local struct {
+	ID string `json:"id"`
+}
+type take struct {
+	ID string `json:"id"`
+}
+type Stake struct {
+	ID string `json:"id"`
+}
+
 func GetLocationData(c echo.Context) error {
 	ip := c.RealIP() // Ini ambil IP client dari header/request
 
