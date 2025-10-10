@@ -4,4 +4,5 @@ configs/firebase-service-account.json
 docker-compose.prod.yml
 docker-compose.yml
 main-prod.go
+main.go
 certs/
