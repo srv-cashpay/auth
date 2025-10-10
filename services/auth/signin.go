@@ -164,6 +164,8 @@ func (u *authService) Signin(req dto.SigninRequest) (*dto.SigninResponse, error)
 	}
 
 	token, err := u.jwt.GenerateToken(user.ID, user.FullName, user.Merchant.ID)
+	refreshtoken, err := u.jwt.GenerateRefreshToken(user.ID, user.FullName, user.Merchant.ID)
+
 	if err != nil {
 		return nil, res.ErrorBuilder(&res.ErrorConstant.InternalServerError, err)
 	}
@@ -180,6 +182,7 @@ func (u *authService) Signin(req dto.SigninRequest) (*dto.SigninResponse, error)
 		FullName:      user.FullName,
 		Email:         decryptedEmail,
 		Token:         token,
+		RefreshToken:  refreshtoken,
 		TokenVerified: user.Verified.Token,
 	}, nil
 }
