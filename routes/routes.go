@@ -39,10 +39,10 @@ var (
 func New() *echo.Echo {
 
 	e := echo.New()
-	e.POST("/verify", verifyH.HandleVerification)
-	e.PUT("/resend-otp", verifyH.ResendVerification)
-	e.POST("/google", authH.GoogleSignIn)
-	e.GET("/get-data-location", h_location.GetLocationData)
+	e.POST("/api/verify", verifyH.HandleVerification)
+	e.PUT("/api/resend-otp", verifyH.ResendVerification)
+	e.POST("/api/google", authH.GoogleSignIn)
+	e.GET("/api/get-data-location", h_location.GetLocationData)
 
 	// e.POST("/authenticator-admin", verifyH.AuthenticatorAdmin)
 
@@ -66,9 +66,9 @@ func New() *echo.Echo {
 		profile.PUT("/profile/update", authH.UpdateProfile)
 	}
 
-	logout := e.Group("api/logout")
+	logout := e.Group("api/auth")
 	{
-		logout.POST("", authH.Signout)
+		logout.POST("/logout", authH.Signout)
 	}
 	return e
 }
