@@ -5,6 +5,11 @@ type GoogleSignInRequest struct {
 	Whatsapp string `json:"whatsapp" form:"whatsapp" validate:"required,whatsapp"`
 }
 
+type GoogleSignInWebRequest struct {
+	AccessToken string `json:"accessToken" validate:"required"`
+	Whatsapp    string `json:"whatsapp" form:"whatsapp" validate:"required,whatsapp"`
+}
+
 type AuthResponse struct {
 	ID            string `json:"id"`
 	MerchantID    string `json:"merchant_id"`

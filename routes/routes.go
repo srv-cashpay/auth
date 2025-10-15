@@ -42,6 +42,7 @@ func New() *echo.Echo {
 	e.POST("/api/verify", verifyH.HandleVerification)
 	e.PUT("/api/resend-otp", verifyH.ResendVerification)
 	e.POST("/api/google", authH.GoogleSignIn)
+	e.POST("/api/web/google", authH.GoogleSignInWeb)
 	e.GET("/api/get-data-location", h_location.GetLocationData)
 
 	// e.POST("/authenticator-admin", verifyH.AuthenticatorAdmin)
