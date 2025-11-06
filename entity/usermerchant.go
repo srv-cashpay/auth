@@ -7,13 +7,12 @@ import (
 	"gorm.io/gorm"
 )
 
-type AccessDoor struct {
+type UserMerchant struct {
 	ID             string                `gorm:"primary_key;type:varchar(39)" json:"id"`
 	FullName       string                `gorm:"full_name;type:varchar(70)" json:"full_name"`
 	Whatsapp       string                `gorm:"uniqueIndex;type:varchar(200)" json:"whatsapp"`
 	Email          string                `gorm:"uniqueIndex;type:varchar(150)" json:"email"`
 	Password       string                `gorm:"password" json:"password"`
-	MerchantID     string                `gorm:"merchant_id" json:"merchant_id"`
 	GoogleID       string                `gorm:"google_id" json:"google_id"`
 	Provider       string                `gorm:"provider" json:"provider"`
 	AccessRoleID   string                `gorm:"access_role_id" json:"access_role_id"`
@@ -24,6 +23,7 @@ type AccessDoor struct {
 	ProfilePicture ProfilePicture        `json:"profile_picture" gorm:"foreignKey:UserID"`
 	Verified       UserVerified          `json:"verified" gorm:"foreignKey:UserID"`
 	File           []File                `json:"file" gorm:"foreignKey:UserID"`
+	Platform       string                `gorm:"platform" json:"platform"`
 	CreatedBy      string                `gorm:"created_by" json:"created_by"`
 	UpdatedBy      string                `gorm:"updated_by" json:"updated_by"`
 	DeletedBy      string                `gorm:"deleted_by" json:"deleted_by"`

@@ -18,6 +18,7 @@ func (r *authRepository) Signup(req dto.SignupRequest) (dto.SignupResponse, erro
 		Email:        req.Email,
 		Password:     req.Password,
 		AccessRoleID: req.AccessRoleID,
+		MerchantID:   util.GenerateRandomString(),
 	}
 
 	if err := r.DB.Save(&user).Error; err != nil {
@@ -25,7 +26,7 @@ func (r *authRepository) Signup(req dto.SignupRequest) (dto.SignupResponse, erro
 	}
 
 	merchant := entitymerchant.MerchantDetail{
-		ID:         util.GenerateRandomString(),
+		ID:         user.MerchantID,
 		UserID:     user.ID,
 		CurrencyID: 1,
 	}
