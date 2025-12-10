@@ -9,7 +9,6 @@ require (
 	github.com/labstack/echo/v4 v4.12.0
 	github.com/srv-cashpay/merchant v0.0.0-20251030092344-1ebff2f99747
 	github.com/srv-cashpay/middlewares v0.0.0-20250421061951-7b6fa9b2a4df
-	github.com/srv-cashpay/util v0.0.0-20251210051756-6bbbdba4a38c
 	golang.org/x/crypto v0.43.0
 	google.golang.org/api v0.247.0
 	gopkg.in/gomail.v2 v2.0.0-20160411212932-81ebce5c23df
@@ -39,6 +38,7 @@ require (
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/sirupsen/logrus v1.9.3 // indirect
 	github.com/skip2/go-qrcode v0.0.0-20200617195104-da1b6568686e // indirect
+	github.com/srv-cashpay/util v0.0.0-20251210051756-6bbbdba4a38c // indirect
 	github.com/teris-io/shortid v0.0.0-20220617161101-71ec9f2aa569 // indirect
 	go.opentelemetry.io/auto/sdk v1.1.0 // indirect
 	go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp v0.61.0 // indirect
