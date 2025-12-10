@@ -20,6 +20,10 @@ func (u *authService) Signup(req dto.SignupRequest) (dto.SignupResponse, error) 
 		return dto.SignupResponse{}, res.ErrorBuilder(&res.ErrorConstant.RegisterMail, nil)
 	}
 
+	if !util.IsEmailExists(req.Email) {
+		return dto.SignupResponse{}, res.ErrorBuilder(&res.ErrorConstant.RegisterMailNotExists, nil)
+	}
+
 	req.Whatsapp = FormatWhatsappNumber(req.Whatsapp)
 
 	// Encrypt the email

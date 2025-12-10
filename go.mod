@@ -9,7 +9,7 @@ require (
 	github.com/labstack/echo/v4 v4.12.0
 	github.com/srv-cashpay/merchant v0.0.0-20251030092344-1ebff2f99747
 	github.com/srv-cashpay/middlewares v0.0.0-20250421061951-7b6fa9b2a4df
-	github.com/srv-cashpay/util v0.1.0
+	github.com/srv-cashpay/util v0.0.1
 	golang.org/x/crypto v0.43.0
 	google.golang.org/api v0.247.0
 	gopkg.in/gomail.v2 v2.0.0-20160411212932-81ebce5c23df
