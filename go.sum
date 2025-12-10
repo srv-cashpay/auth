@@ -88,8 +88,8 @@ github.com/srv-cashpay/merchant v0.0.0-20251030092344-1ebff2f99747 h1:ygvCYHREV6
 github.com/srv-cashpay/merchant v0.0.0-20251030092344-1ebff2f99747/go.mod h1:XPncRmzgx9PvWkQNO4HyzJnnUNiDixF9lfLFJcezT+U=
 github.com/srv-cashpay/middlewares v0.0.0-20250421061951-7b6fa9b2a4df h1:mm/Wnj/dBCUUr4SL2RSnPlHVbMxo5LA1rQ4uQt+5v18=
 github.com/srv-cashpay/middlewares v0.0.0-20250421061951-7b6fa9b2a4df/go.mod h1:f1cuu5uW9mmtZXaOJ3rBHvtvDOtieLZWmYd1UmBh/CM=
-github.com/srv-cashpay/util v0.0.0-20251210051756-6bbbdba4a38c h1:uSj4Jy78GmM31sJkPAb3GkFGsEGfI04x93HogxCtkt8=
-github.com/srv-cashpay/util v0.0.0-20251210051756-6bbbdba4a38c/go.mod h1:j1DF+WPs9SpKOvzhXKIJivjVu8ytFB6inIQbnyz+Qd4=
+github.com/srv-cashpay/util v0.1.0 h1:YEAmWua2WAOQXRuaA0AVex+BV9JN2PjfJVt1/ONxp70=
+github.com/srv-cashpay/util v0.1.0/go.mod h1:j1DF+WPs9SpKOvzhXKIJivjVu8ytFB6inIQbnyz+Qd4=
 github.com/streadway/amqp v1.1.0 h1:py12iX8XSyI7aN/3dUT8DFIDJazNJsVJdxNVEpnQTZM=
 github.com/streadway/amqp v1.1.0/go.mod h1:WYSrTEYHOXHd0nwFeUXAe2G2hRnQT+deZJJf88uS9Bg=
 github.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=
