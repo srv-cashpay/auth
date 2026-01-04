@@ -29,7 +29,7 @@ func (u *verifyService) ResendVerifyUserByToken(req dto.ResendVerificationReques
 	}
 	user.Otp = resend.Otp
 
-	if err := util.Zoho(resend.Email, user.Otp); err != nil {
+	if err := util.Mail(resend.Email, user.Otp); err != nil {
 		return nil, err
 	}
 

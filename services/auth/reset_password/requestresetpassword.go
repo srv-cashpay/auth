@@ -50,7 +50,7 @@ func (s *verifyService) RequestResetPassword(req dto.ResetPasswordRequest) (dto.
 		return dto.ResetPasswordResponse{}, err
 	}
 
-	if err := util.Zoho(decryptedEmail, otp); err != nil {
+	if err := util.Mail(decryptedEmail, otp); err != nil {
 		return dto.ResetPasswordResponse{}, err
 		// return errors.New("Error sending reset email")
 	}
