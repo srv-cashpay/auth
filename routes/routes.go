@@ -39,11 +39,11 @@ var (
 func New() *echo.Echo {
 
 	e := echo.New()
-	e.POST("/api/verify", verifyH.HandleVerification)
-	e.PUT("/api/resend-otp", verifyH.ResendVerification)
-	e.POST("/api/google", authH.GoogleSignIn)
-	e.POST("/api/web/google", authH.GoogleSignInWeb)
-	e.GET("/api/get-data-location", h_location.GetLocationData)
+	e.POST("/api/auth/verify", verifyH.HandleVerification)
+	e.PUT("/api/auth/resend-otp", verifyH.ResendVerification)
+	e.POST("/api/auth/google", authH.GoogleSignIn)
+	e.POST("/api/auth/web/google", authH.GoogleSignInWeb)
+	e.GET("/api/auth/get-data-location", h_location.GetLocationData)
 
 	// e.POST("/authenticator-admin", verifyH.AuthenticatorAdmin)
 
