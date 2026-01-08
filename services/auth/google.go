@@ -5,6 +5,8 @@ import (
 	"encoding/json"
 	"errors"
 	"net/http"
+	"net/url"
+	"os"
 
 	dto "github.com/srv-cashpay/auth/dto/auth"
 	"github.com/srv-cashpay/auth/entity"
@@ -109,12 +111,45 @@ func (s *authService) SignInWithGoogle(req dto.GoogleSignInRequest) (*dto.AuthRe
 }
 
 func (s *authService) SignInWithGoogleWeb(req dto.GoogleSignInWebRequest) (*dto.AuthResponse, error) {
-	// 1. Ambil profil dari Google UserInfo API
-	client := &http.Client{}
-	profileReq, _ := http.NewRequest("GET", "https://www.googleapis.com/oauth2/v3/userinfo", nil)
-	profileReq.Header.Set("Authorization", "Bearer "+req.AccessToken)
 
-	resp, err := client.Do(profileReq)
+	// 1️⃣ TUKAR CODE → TOKEN GOOGLE
+	tokenResp, err := http.PostForm(
+		"https://oauth2.googleapis.com/token",
+		url.Values{
+			"code":          {req.Code},
+			"client_id":     {os.Getenv("GOOGLE_CLIENT_ID")},
+			"client_secret": {os.Getenv("GOOGLE_CLIENT_SECRET")},
+			"redirect_uri":  {os.Getenv("GOOGLE_REDIRECT_URI")},
+			"grant_type":    {"authorization_code"},
+		},
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer tokenResp.Body.Close()
+
+	var tokenData struct {
+		AccessToken string `json:"access_token"`
+		IdToken     string `json:"id_token"`
+	}
+	if err := json.NewDecoder(tokenResp.Body).Decode(&tokenData); err != nil {
+		return nil, err
+	}
+
+	if tokenData.AccessToken == "" {
+		return nil, errors.New("failed to exchange google code")
+	}
+
+	// 2️⃣ AMBIL PROFIL GOOGLE
+	reqUser, _ := http.NewRequest(
+		"GET",
+		"https://www.googleapis.com/oauth2/v3/userinfo",
+		nil,
+	)
+	reqUser.Header.Set("Authorization", "Bearer "+tokenData.AccessToken)
+
+	client := &http.Client{}
+	resp, err := client.Do(reqUser)
 	if err != nil {
 		return nil, err
 	}
@@ -129,8 +164,13 @@ func (s *authService) SignInWithGoogleWeb(req dto.GoogleSignInWebRequest) (*dto.
 	}
 
 	if profile.Email == "" {
-		return nil, errors.New("email not found in Google profile")
+		return nil, errors.New("email not found from google")
 	}
+
+	// =========================
+	// 🔽 LANJUTKAN KODE LAMA KAMU
+	// (encrypt email, cek user, create user, generate JWT)
+	// =========================
 
 	// 2. Enkripsi email
 	encryptedEmail, err := util.Encrypt(profile.Email)

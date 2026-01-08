@@ -6,8 +6,8 @@ type GoogleSignInRequest struct {
 }
 
 type GoogleSignInWebRequest struct {
-	AccessToken string `json:"accessToken" validate:"required"`
-	Whatsapp    string `json:"whatsapp" form:"whatsapp" validate:"required,whatsapp"`
+	Code     string `json:"code" validate:"required"`
+	Whatsapp string `json:"whatsapp" form:"whatsapp" validate:"required,whatsapp"`
 }
 
 type AuthResponse struct {
