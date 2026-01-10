@@ -8,7 +8,6 @@ import (
 	"net/url"
 	"os"
 
-	"github.com/google/uuid"
 	dto "github.com/srv-cashpay/auth/dto/auth"
 	"github.com/srv-cashpay/auth/entity"
 	util "github.com/srv-cashpay/util/s"
@@ -169,27 +168,79 @@ func (s *authService) SignInWithGoogleWeb(req dto.GoogleSignInWebRequest) (*dto.
 	// ===============================
 	// 3. USER LOGIC (PUNYA KAMU)
 	// ===============================
-	encryptedEmail, _ := util.Encrypt(profile.Email)
 
-	user, err := s.Repo.FindByEncryptedEmail(encryptedEmail)
+	encryptedEmail, err := util.Encrypt(profile.Email)
 	if err != nil {
-		user = &entity.AccessDoor{
-			ID:       uuid.NewString(),
-			Email:    encryptedEmail,
-			FullName: profile.Name,
-			Provider: "google",
-		}
-		_ = s.Repo.Create(user)
+		return nil, err
 	}
 
-	token, _ := s.jwt.GenerateToken(user.ID, user.FullName, "")
-	refresh, _ := s.jwt.GenerateRefreshToken(user.ID, user.FullName, "")
+	user, err := s.Repo.FindByEncryptedEmail(encryptedEmail)
+
+	if err != nil && err.Error() == "user not found" {
+		// 4. Buat user baru jika belum ada
+		if req.Whatsapp == "" {
+			return &dto.AuthResponse{
+				FullName: profile.Name,
+				Email:    encryptedEmail,
+				Whatsapp: "",
+			}, nil
+		}
+
+		secureID, err := generateSecureID()
+		if err != nil {
+			return nil, err
+		}
+
+		encryptedWhatsapp, err := util.Encrypt(req.Whatsapp)
+		if err != nil {
+			return nil, err
+		}
+
+		user = &entity.AccessDoor{
+			ID:           secureID,
+			Email:        encryptedEmail,
+			FullName:     profile.Name,
+			Provider:     "google",
+			AccessRoleID: "e9Wl2JyVeBM_",
+			Whatsapp:     encryptedWhatsapp,
+		}
+
+		if err := s.Repo.Create(user); err != nil {
+			return nil, err
+		}
+
+		user, err = s.Repo.FindByEncryptedEmail(encryptedEmail)
+		if err != nil {
+			return nil, err
+		}
+	} else if err != nil {
+		return nil, err
+	} else {
+		if user.Whatsapp == "/bvTmYgHVZjVt85fktdsXA==" && req.Whatsapp != "/bvTmYgHVZjVt85fktdsXA==" {
+			if err := s.Repo.UpdateWhatsapp(user.ID, req.Whatsapp); err != nil {
+				return nil, err
+			}
+			user.Whatsapp = req.Whatsapp
+		}
+	}
+
+	token, err := s.jwt.GenerateToken(user.ID, user.FullName, user.Merchant.ID)
+	if err != nil {
+		return nil, err
+	}
+	refreshToken, err := s.jwt.GenerateRefreshToken(user.ID, user.FullName, user.Merchant.ID)
+	if err != nil {
+		return nil, err
+	}
 
 	return &dto.AuthResponse{
-		ID:           user.ID,
-		FullName:     user.FullName,
-		Email:        user.Email,
-		Token:        token,
-		RefreshToken: refresh,
+		ID:            user.ID,
+		MerchantID:    user.Merchant.ID,
+		FullName:      user.FullName,
+		Whatsapp:      user.Whatsapp,
+		Email:         user.Email,
+		Token:         token,
+		RefreshToken:  refreshToken,
+		TokenVerified: user.Verified.Token,
 	}, nil
 }
