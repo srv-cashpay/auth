@@ -39,15 +39,15 @@ var (
 func New() *echo.Echo {
 
 	e := echo.New()
-	e.POST("/api/auth/verify", verifyH.HandleVerification)
-	e.PUT("/api/auth/resend-otp", verifyH.ResendVerification)
-	e.POST("/api/auth/google", authH.GoogleSignIn)
-	e.POST("/api/auth/web/google", authH.GoogleSignInWeb)
-	e.GET("/api/auth/get-data-location", h_location.GetLocationData)
+	e.POST("/auth/verify", verifyH.HandleVerification)
+	e.PUT("/auth/resend-otp", verifyH.ResendVerification)
+	e.POST("/auth/google", authH.GoogleSignIn)
+	e.POST("/auth/web/google", authH.GoogleSignInWeb)
+	e.GET("/auth/get-data-location", h_location.GetLocationData)
 
 	// e.POST("/authenticator-admin", verifyH.AuthenticatorAdmin)
 
-	auth := e.Group("api/auth", middlewares.ApiKeyMiddleware)
+	auth := e.Group("auth", middlewares.ApiKeyMiddleware)
 	{
 		auth.POST("/signup", authH.Signup)
 		auth.POST("/signin", authH.Signin)
@@ -57,17 +57,17 @@ func New() *echo.Echo {
 		auth.POST("/request-reset-password", resetH.RequestResetPassword)
 		auth.PUT("/resend-reset", resetH.ResendVerification)
 	}
-	refresh := e.Group("api/auth", middlewares.AuthorizeJWT(JWT))
+	refresh := e.Group("auth", middlewares.AuthorizeJWT(JWT))
 	{
 		refresh.POST("/refresh", authH.RefreshToken)
 	}
-	profile := e.Group("api/auth", middlewares.AuthorizeJWT(JWT))
+	profile := e.Group("auth", middlewares.AuthorizeJWT(JWT))
 	{
 		profile.GET("/profile", authH.Profile)
 		profile.PUT("/profile/update", authH.UpdateProfile)
 	}
 
-	logout := e.Group("api/auth")
+	logout := e.Group("auth")
 	{
 		logout.POST("/logout", authH.Signout)
 	}
