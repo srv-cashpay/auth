@@ -47,7 +47,7 @@ func New() *echo.Echo {
 
 	// e.POST("/authenticator-admin", verifyH.AuthenticatorAdmin)
 
-	auth := e.Group("auth", middlewares.ApiKeyMiddleware)
+	auth := e.Group("/auth", middlewares.ApiKeyMiddleware)
 	{
 		auth.POST("/signup", authH.Signup)
 		auth.POST("/signin", authH.Signin)
@@ -57,17 +57,17 @@ func New() *echo.Echo {
 		auth.POST("/request-reset-password", resetH.RequestResetPassword)
 		auth.PUT("/resend-reset", resetH.ResendVerification)
 	}
-	refresh := e.Group("auth", middlewares.AuthorizeJWT(JWT))
+	refresh := e.Group("/auth", middlewares.AuthorizeJWT(JWT))
 	{
 		refresh.POST("/refresh", authH.RefreshToken)
 	}
-	profile := e.Group("auth", middlewares.AuthorizeJWT(JWT))
+	profile := e.Group("/auth", middlewares.AuthorizeJWT(JWT))
 	{
 		profile.GET("/profile", authH.Profile)
 		profile.PUT("/profile/update", authH.UpdateProfile)
 	}
 
-	logout := e.Group("auth")
+	logout := e.Group("/auth")
 	{
 		logout.POST("/logout", authH.Signout)
 	}
